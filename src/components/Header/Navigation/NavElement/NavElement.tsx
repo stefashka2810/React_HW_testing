@@ -1,0 +1,26 @@
+import { NavLink } from 'react-router-dom';
+import { FC } from 'react';
+import { Text } from '@components/common/Text';
+import styles from './NavElement.module.css';
+import cn from 'classnames';
+type Props = {
+    to: string;
+    title: string;
+    end?: boolean;
+    icon: React.ReactNode;
+};
+
+export const NavElement: FC<Props> = ({ to, title, icon, end = false }) => {
+    return (
+        <NavLink
+            to={to}
+            className={({ isActive }: { isActive: boolean }) =>
+                cn(styles.root, { [styles.active]: isActive })
+            }
+            end={end}
+        >
+            {icon}
+            <Text size="m">{title}</Text>
+        </NavLink>
+    );
+};

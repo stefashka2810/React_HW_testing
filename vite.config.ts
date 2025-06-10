@@ -14,6 +14,12 @@ export default defineConfig(({ mode }) => {
         resolve: {
             alias: {
                 '@pages': path.resolve(__dirname, './src/pages'),
+                '@components': path.resolve(__dirname, './src/components'),
+                '@layouts': path.resolve(__dirname, './src/layouts'),
+                '@services': path.resolve(__dirname, './src/services'),
+                '@store': path.resolve(__dirname, './src/store'),
+                '@styles': path.resolve(__dirname, './src/styles'),
+                '@utils': path.resolve(__dirname, './src/utils'),
             },
         },
         plugins: [react()],
