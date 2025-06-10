@@ -9,9 +9,12 @@
 
     --color-accent-purple: #cb81ff;
     --color-accent-green: #2ae881;
+    --color-accent-gray: #c0c0c0;
+    --color-accent-yellow: #fce300;
 
     --color-primary-purple: #eacdff;
     --color-primary-green: #d4fae6;
+    --color-primary-gray: #787878;
 }
 
 * {
@@ -36,4 +39,10 @@ li {
     padding: 0;
 
     list-style: none;
+}
+
+button {
+    border: none;
+    font-family: inherit;
+    cursor: pointer;
 }

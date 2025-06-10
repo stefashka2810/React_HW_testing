@@ -1,13 +1,7 @@
-export interface HistoryItem {
-    id: string;
-    timestamp: number;
-    fileName: string;
-    highlights: string[];
-}
+import { STORAGE_KEY } from './consts';
+import { HistoryItemType } from './types';
 
-const STORAGE_KEY = 'tableHistory';
-
-export const getHistory = (): HistoryItem[] => {
+export const getHistory = (): HistoryItemType[] => {
     try {
         const history = localStorage.getItem(STORAGE_KEY);
         return history ? JSON.parse(history) : [];
@@ -16,20 +10,22 @@ export const getHistory = (): HistoryItem[] => {
     }
 };
 
-export const addToHistory = (item: Omit<HistoryItem, 'id' | 'timestamp'>) => {
+export const addToHistory = (
+    item: Omit<HistoryItemType, 'id' | 'timestamp'>
+) => {
     try {
         const history = getHistory();
-        const newItem: HistoryItem = {
+        const newItem: HistoryItemType = {
             ...item,
             id: crypto.randomUUID(),
             timestamp: Date.now(),
         };
-        
+
         localStorage.setItem(
             STORAGE_KEY,
             JSON.stringify([newItem, ...history])
         );
-        
+
         return newItem;
     } catch (error) {
         console.error('Failed to add item to history:', error);
@@ -40,7 +36,7 @@ export const addToHistory = (item: Omit<HistoryItem, 'id' | 'timestamp'>) => {
 export const removeFromHistory = (id: string) => {
     try {
         const history = getHistory();
-        const newHistory = history.filter(item => item.id !== id);
+        const newHistory = history.filter((item) => item.id !== id);
         localStorage.setItem(STORAGE_KEY, JSON.stringify(newHistory));
     } catch (error) {
         console.error('Failed to remove item from history:', error);
@@ -55,4 +51,4 @@ export const clearHistory = () => {
         console.error('Failed to clear history:', error);
         throw error;
     }
-}; 
+};

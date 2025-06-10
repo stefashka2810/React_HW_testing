@@ -27,7 +27,9 @@
             "@services/*": ["src/services/*"],
             "@store/*": ["src/store/*"],
             "@styles/*": ["src/styles/*"],
-            "@utils/*": ["src/utils/*"]
+            "@utils/*": ["src/utils/*"],
+            "@hooks/*": ["src/hooks/*"],
+            "@ui/*": ["src/ui/*"]
         }
     },
     "include": ["src"],

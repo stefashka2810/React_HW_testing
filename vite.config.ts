@@ -20,6 +20,8 @@ export default defineConfig(({ mode }) => {
                 '@store': path.resolve(__dirname, './src/store'),
                 '@styles': path.resolve(__dirname, './src/styles'),
                 '@utils': path.resolve(__dirname, './src/utils'),
+                '@hooks': path.resolve(__dirname, './src/hooks'),
+                '@ui': path.resolve(__dirname, './src/ui'),
             },
         },
         plugins: [react()],

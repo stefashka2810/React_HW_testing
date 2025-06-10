@@ -1,80 +1,58 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './HistoryPage.module.css';
-
-interface HistoryItem {
-    id: string;
-    timestamp: number;
-    fileName: string;
-    highlights?: string[];
-}
+import { HistoryItemType } from '@utils/types';
+import { clearHistory, getHistory, removeFromHistory } from '@utils/storage';
+import { STORAGE_KEY } from '@utils/consts';
+import { HistoryItem } from '@components/common/HistoryItem';
+import { Button } from '@ui/Button';
 
 export const HistoryPage = () => {
-    const [history, setHistory] = useState<HistoryItem[]>([]);
+    const [history, setHistory] = useState(getHistory);
     const navigate = useNavigate();
 
     useEffect(() => {
-        const storedHistory = localStorage.getItem('tableHistory');
+        const storedHistory = localStorage.getItem(STORAGE_KEY);
         if (storedHistory) {
             setHistory(JSON.parse(storedHistory));
         }
     }, []);
 
     const handleClearHistory = () => {
-        localStorage.removeItem('tableHistory');
+        clearHistory();
         setHistory([]);
     };
 
-    const handleItemClick = (item: HistoryItem) => {
-        // TODO: Implement modal with highlights
+    const handleItemClick = (item: HistoryItemType) => {
         console.log('Show highlights for:', item);
     };
 
     const handleDeleteItem = (id: string) => {
-        const newHistory = history.filter(item => item.id !== id);
-        localStorage.setItem('tableHistory', JSON.stringify(newHistory));
+        const newHistory = history.filter((item) => item.id !== id);
+        removeFromHistory(id);
         setHistory(newHistory);
     };
 
     return (
         <div className={styles.container}>
-            <h1>История</h1>
-            <div className={styles.actions}>
-                <button 
-                    className={styles.generateButton}
-                    onClick={() => navigate('/generate')}
-                >
-                    Сгенерировать больше
-                </button>
-                <button 
-                    className={styles.clearButton}
-                    onClick={handleClearHistory}
-                >
-                    Очистить историю
-                </button>
-            </div>
-            <div className={styles.historyList}>
-                {history.map(item => (
-                    <div key={item.id} className={styles.historyItem}>
-                        <div 
-                            className={styles.itemContent}
-                            onClick={() => handleItemClick(item)}
-                        >
-                            <span>{new Date(item.timestamp).toLocaleString()}</span>
-                            <span>{item.fileName}</span>
-                        </div>
-                        <button
-                            className={styles.deleteButton}
-                            onClick={() => handleDeleteItem(item.id)}
-                        >
-                            Удалить
-                        </button>
-                    </div>
+            <div className={styles.list}>
+                {history.map((item) => (
+                    <HistoryItem
+                        key={item.id}
+                        item={item}
+                        onClick={handleItemClick}
+                        onDelete={handleDeleteItem}
+                    />
                 ))}
-                {history.length === 0 && (
-                    <p className={styles.emptyMessage}>История пуста</p>
-                )}
+            </div>
+            <div className={styles.actions}>
+                <Button variant="primary" onClick={() => navigate('/generate')}>
+                    Сгенерировать больше
+                </Button>
+                <Button variant="clear" onClick={handleClearHistory}>
+                    Очистить всё
+                </Button>
             </div>
         </div>
     );
-}; 
+};
