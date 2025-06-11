@@ -1,6 +1,6 @@
-import { Text } from '@components/common/Text';
-import { Smile } from '@components/icons/Smile';
-import { SmileSad } from '@components/icons/SmileSad';
+import { Typography } from '@ui/Typography';
+import { Smile } from '@ui/icons/Smile';
+import { SmileSad } from '@ui/icons/SmileSad';
 import { FC } from 'react';
 
 import styles from './Status.module.css';
@@ -15,12 +15,12 @@ export const Status: FC<Props> = ({ type, isActive }) => {
         <span className={cn(styles.root, { [styles.active]: isActive })}>
             {type === 'success' ? (
                 <>
-                    <Text>Обработан успешно</Text>
+                    <Typography>Обработан успешно</Typography>
                     <Smile />
                 </>
             ) : (
                 <>
-                    <Text>Не удалось обработать</Text>
+                    <Typography>Не удалось обработать</Typography>
                     <SmileSad />
                 </>
             )}

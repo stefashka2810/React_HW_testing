@@ -9,7 +9,7 @@
     justify-content: space-between;
     width: 100%;
     padding: 16px 20px;
-    border-radius: 40px;
+    border-radius: var(--border-radius-xl);
     background-color: var(--color-accent-purple);
 }
 
@@ -21,11 +21,16 @@
     width: 87px;
     height: 87px;
     background-color: var(--color-white);
-    border-radius: 20px;
+    border-radius: var(--border-radius-s);
 }
 
 .fileName {
     display: flex;
     align-items: center;
     gap: 5px;
+    max-width: 350px;
+}
+
+.icon {
+    flex-shrink: 0;
 }

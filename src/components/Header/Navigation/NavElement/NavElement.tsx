@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import { FC } from 'react';
-import { Text } from '@components/common/Text';
+import { Typography } from '@ui/Typography';
 import styles from './NavElement.module.css';
 import cn from 'classnames';
 type Props = {
@@ -20,7 +20,7 @@ export const NavElement: FC<Props> = ({ to, title, icon, end = false }) => {
             end={end}
         >
             {icon}
-            <Text size="m">{title}</Text>
+            <Typography size="m">{title}</Typography>
         </NavLink>
     );
 };

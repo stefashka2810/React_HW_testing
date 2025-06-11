@@ -67,3 +67,11 @@
 .text-color-purple {
     color: var(--color-primary-purple);
 }
+
+.withLineClamp {
+    display: -webkit-box;
+    word-break: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+}

@@ -16,3 +16,7 @@ export type HistoryItemType = {
     fileName: string;
     highlights?: Highlights;
 };
+
+export type WithClassName = {
+    className?: string;
+};

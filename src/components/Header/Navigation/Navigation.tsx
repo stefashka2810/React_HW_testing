@@ -1,8 +1,8 @@
 import styles from './Navigation.module.css';
 import { NavElement } from './NavElement';
-import { Create } from '@components/icons/Create';
-import { History } from '@components/icons/History';
-import { Upload } from '@components/icons/Upload';
+import { Create } from '@ui/icons/Create';
+import { History } from '@ui/icons/History';
+import { Upload } from '@ui/icons/Upload';
 
 export const Navigation = () => {
     return (

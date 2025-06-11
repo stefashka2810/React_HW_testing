@@ -6,9 +6,15 @@ import { clearHistory, getHistory, removeFromHistory } from '@utils/storage';
 import { STORAGE_KEY } from '@utils/consts';
 import { HistoryItem } from '@components/common/HistoryItem';
 import { Button } from '@ui/Button';
+import { HistoryModal } from '@components/HistoryModal';
 
 export const HistoryPage = () => {
     const [history, setHistory] = useState(getHistory);
+    const [showModal, setShowModal] = useState(false);
+    const [selectedItem, setSelectedItem] = useState<HistoryItemType | null>(
+        null
+    );
+
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -24,13 +30,19 @@ export const HistoryPage = () => {
     };
 
     const handleItemClick = (item: HistoryItemType) => {
-        console.log('Show highlights for:', item);
+        setSelectedItem(item);
+        setShowModal(true);
     };
 
     const handleDeleteItem = (id: string) => {
         const newHistory = history.filter((item) => item.id !== id);
         removeFromHistory(id);
         setHistory(newHistory);
+    };
+
+    const handleCloseModal = () => {
+        setSelectedItem(null);
+        setShowModal(false);
     };
 
     return (
@@ -53,6 +65,11 @@ export const HistoryPage = () => {
                     Очистить всё
                 </Button>
             </div>
+            <HistoryModal
+                isOpen={showModal}
+                historyItem={selectedItem}
+                onClose={handleCloseModal}
+            />
         </div>
     );
 };

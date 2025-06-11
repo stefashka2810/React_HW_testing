@@ -2,11 +2,11 @@ import { HistoryItemType } from '@utils/types';
 import { FC } from 'react';
 
 import styles from './HistoryItem.module.css';
-import { Text } from '../Text';
+import { Typography } from '@ui/Typography';
 import { formatDate } from '@utils/formateDate';
 import { Status } from './Status';
-import { Trash } from '@components/icons/Trash';
-import { File } from '@components/icons/File';
+import { Trash } from '@ui/icons/Trash';
+import { File } from '@ui/icons/File';
 type Props = {
     item: HistoryItemType;
     onDelete: (id: string) => void;
@@ -25,10 +25,6 @@ export const HistoryItem: FC<Props> = ({ item, onClick, onDelete }) => {
     };
 
     const handleItemClick = () => {
-        if (!hasHighlights) {
-            return;
-        }
-
         onClick(item);
     };
 
@@ -40,10 +36,10 @@ export const HistoryItem: FC<Props> = ({ item, onClick, onDelete }) => {
                 onClick={handleItemClick}
             >
                 <div className={styles.fileName}>
-                    <File />
-                    <Text>{fileName}</Text>
+                    <File className={styles.icon} />
+                    <Typography maxRowsNumber={1}>{fileName}</Typography>
                 </div>
-                <Text>{date}</Text>
+                <Typography>{date}</Typography>
                 <Status type="success" isActive={hasHighlights} />
                 <Status type="error" isActive={!hasHighlights} />
             </button>

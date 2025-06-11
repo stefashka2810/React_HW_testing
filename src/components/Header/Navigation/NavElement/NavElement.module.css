@@ -14,7 +14,7 @@
     left: 0;
     background-color: var(--color-black);
     transition: width 0.3s ease;
-    border-radius: 30px;
+    border-radius: var(--border-radius-l);
 }
 
 .active::after {

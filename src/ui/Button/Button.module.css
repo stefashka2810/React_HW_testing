@@ -6,10 +6,9 @@
     font-weight: 500;
     padding: 20px 27px;
     border: none;
-    border-radius: 25px;
+    border-radius: var(--border-radius-m);
     cursor: pointer;
     transition: all 0.2s ease-in-out;
-    min-width: 120px;
 }
 
 .fullWidth {

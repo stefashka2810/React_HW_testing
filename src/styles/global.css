@@ -15,6 +15,17 @@
     --color-primary-purple: #eacdff;
     --color-primary-green: #d4fae6;
     --color-primary-gray: #787878;
+
+    --color-black-transparent: rgba(6, 6, 6, 0.3);
+
+    --z-index-modal: 2;
+
+    --border-radius-xs: 10px;
+    --border-radius-s: 20px;
+    --border-radius-m: 25px;
+    --border-radius-l: 30px;
+    --border-radius-xl: 40px;
+    --border-radius-xxl: 45px;
 }
 
 * {
