@@ -28,7 +28,7 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, children, onClose }) => {
                                 className={styles.closeButton}
                                 onClick={onClose}
                             >
-                                <Cross />
+                                <Cross size={32} />
                             </Button>
                         )}
                     </div>

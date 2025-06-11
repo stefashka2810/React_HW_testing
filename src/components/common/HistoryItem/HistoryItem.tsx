@@ -36,7 +36,7 @@ export const HistoryItem: FC<Props> = ({ item, onClick, onDelete }) => {
                 onClick={handleItemClick}
             >
                 <div className={styles.fileName}>
-                    <File className={styles.icon} />
+                    <File size={40} className={styles.icon} />
                     <Typography maxRowsNumber={1}>{fileName}</Typography>
                 </div>
                 <Typography>{date}</Typography>
@@ -48,7 +48,7 @@ export const HistoryItem: FC<Props> = ({ item, onClick, onDelete }) => {
                 aria-label={`Удалить файл ${fileName}`}
                 onClick={handleDeleteButtonClick}
             >
-                <Trash />
+                <Trash size={33} />
             </button>
         </div>
     );

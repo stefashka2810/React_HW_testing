@@ -20,3 +20,20 @@ export type HistoryItemType = {
 export type WithClassName = {
     className?: string;
 };
+
+export type IconBaseProps = {
+    /**
+     * Цвет иконки
+     */
+    color?: string;
+
+    /**
+     * Размер иконки
+     */
+    size: number;
+
+    /**
+     * Текст при наведении мышки
+     */
+    title?: string;
+} & React.ComponentPropsWithoutRef<'svg'>;

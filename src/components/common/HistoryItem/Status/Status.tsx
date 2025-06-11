@@ -16,12 +16,12 @@ export const Status: FC<Props> = ({ type, isActive }) => {
             {type === 'success' ? (
                 <>
                     <Typography>Обработан успешно</Typography>
-                    <Smile />
+                    <Smile size={40} />
                 </>
             ) : (
                 <>
                     <Typography>Не удалось обработать</Typography>
-                    <SmileSad />
+                    <SmileSad size={40} />
                 </>
             )}
         </span>
