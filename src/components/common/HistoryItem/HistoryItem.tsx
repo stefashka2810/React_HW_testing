@@ -1,12 +1,16 @@
-import { HistoryItemType } from '@utils/types';
+
 import { FC } from 'react';
 
-import styles from './HistoryItem.module.css';
+import { File } from '@ui/icons/File';
+import { Trash } from '@ui/icons/Trash';
 import { Typography } from '@ui/Typography';
 import { formatDate } from '@utils/formateDate';
+import { HistoryItemType } from '@utils/types';
+
 import { Status } from './Status';
-import { Trash } from '@ui/icons/Trash';
-import { File } from '@ui/icons/File';
+
+import styles from './HistoryItem.module.css';
+
 type Props = {
     item: HistoryItemType;
     onDelete: (id: string) => void;

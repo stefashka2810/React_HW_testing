@@ -29,6 +29,7 @@ export const processTable = async (
         }
 
         let highlights: string[] = [];
+        // eslint-disable-next-line no-constant-condition
         while (true) {
             const { done, value } = await reader.read();
             if (done) break;
@@ -48,7 +49,9 @@ export const processTable = async (
 
         return highlights;
     } catch (error) {
-        throw error instanceof Error ? error : new Error('Unknown error occurred');
+        throw error instanceof Error
+            ? error
+            : new Error('Unknown error occurred');
     }
 };
 
@@ -64,6 +67,8 @@ export const generateTable = async (): Promise<Blob> => {
 
         return await response.blob();
     } catch (error) {
-        throw error instanceof Error ? error : new Error('Failed to generate table');
+        throw error instanceof Error
+            ? error
+            : new Error('Failed to generate table');
     }
-}; 
+};

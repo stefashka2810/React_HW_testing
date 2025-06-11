@@ -1,55 +1,59 @@
 module.exports = {
-    env: {
-        browser: true,
-        es2021: true,
-    },
+    root: true,
+    env: { browser: true, es2020: true },
     extends: [
         'eslint:recommended',
         'plugin:@typescript-eslint/recommended',
-        'plugin:react/recommended',
         'plugin:react-hooks/recommended',
-        'plugin:import/recommended',
-        'plugin:import/typescript',
     ],
+    ignorePatterns: ['dist', '.eslintrc.cjs'],
     parser: '@typescript-eslint/parser',
-    parserOptions: {
-        ecmaFeatures: {
-            jsx: true,
-        },
-        ecmaVersion: 'latest',
-        sourceType: 'module',
-    },
-    plugins: ['react', '@typescript-eslint', 'react-hooks', 'import'],
+    plugins: ['react-refresh', 'simple-import-sort'],
     rules: {
-        'react/react-in-jsx-scope': 'off',
-        'react/prop-types': 'off',
-        '@typescript-eslint/explicit-module-boundary-types': 'off',
-        'no-unused-vars': 'off',
-        '@typescript-eslint/no-unused-vars': ['error'],
-        'react/jsx-uses-react': 'off',
-        'react/jsx-filename-extension': [1, { extensions: ['.tsx', '.ts'] }],
-        'import/order': [
+        'react-refresh/only-export-components': [
+            'warn',
+            { allowConstantExport: true },
+        ],
+        'simple-import-sort/imports': 'error',
+        'simple-import-sort/exports': 'error',
+        '@typescript-eslint/no-unused-vars': [
             'error',
             {
-                groups: [
-                    ['builtin', 'external'],
-                    'internal',
-                    ['parent', 'sibling', 'index'],
-                ],
-                'newlines-between': 'always',
-                alphabetize: {
-                    order: 'asc',
-                    caseInsensitive: true,
-                },
+                args: 'all',
+                argsIgnorePattern: '^_',
+                caughtErrors: 'all',
+                caughtErrorsIgnorePattern: '^_',
+                destructuredArrayIgnorePattern: '^_',
+                varsIgnorePattern: '^_',
+                ignoreRestSiblings: true,
             },
         ],
     },
-    settings: {
-        react: {
-            version: 'detect',
+    overrides: [
+        // override "simple-import-sort" config
+        {
+            files: ['*.js', '*.jsx', '*.ts', '*.tsx'],
+            rules: {
+                'simple-import-sort/imports': [
+                    'error',
+                    {
+                        groups: [
+                            // Packages `react` related packages and external/builtin packages come first.
+                            ['^react', '^/?\\w'],
+                            // Internal packages.
+                            ['^@?\\w'],
+                            // Side effect imports.
+                            ['^\\u0000'],
+                            // Parent imports. Put `..` last.
+                            ['^\\.\\.(?!/?$)', '^\\.\\./?$'],
+                            // Other relative imports. Put same-folder imports and `.` last.
+                            ['^\\./(?=.*/)(?!/?$)', '^\\.(?!/?$)', '^\\./?$'],
+                            // Style imports.
+                            ['^.+\\.?(css)$'],
+                        ],
+                    },
+                ],
+            },
         },
-        'import/resolver': {
-            typescript: {},
-        },
-    },
+    ],
 };

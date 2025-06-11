@@ -1,5 +1,7 @@
-import { IconBaseProps } from '@utils/types';
 import { FC } from 'react';
+
+import { IconBaseProps } from '@utils/types';
+
 
 export const Cross: FC<IconBaseProps> = ({ color, size, ...rest }) => (
     <svg

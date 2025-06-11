@@ -1,10 +1,12 @@
-import { Typography } from '@ui/Typography';
+
+import { FC } from 'react';
+import cn from 'classnames';
+
 import { Smile } from '@ui/icons/Smile';
 import { SmileSad } from '@ui/icons/SmileSad';
-import { FC } from 'react';
+import { Typography } from '@ui/Typography';
 
 import styles from './Status.module.css';
-import cn from 'classnames';
 
 type Props = {
     type: 'success' | 'error';

@@ -1,8 +1,11 @@
-import { NavLink } from 'react-router-dom';
 import { FC } from 'react';
-import { Typography } from '@ui/Typography';
-import styles from './NavElement.module.css';
+import { NavLink } from 'react-router-dom';
 import cn from 'classnames';
+
+import { Typography } from '@ui/Typography';
+
+import styles from './NavElement.module.css';
+
 type Props = {
     to: string;
     title: string;

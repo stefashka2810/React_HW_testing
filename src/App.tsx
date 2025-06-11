@@ -1,8 +1,10 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
+import { BrowserRouter as Router, Route,Routes } from 'react-router-dom';
+
 import { MainLayout } from '@layouts/MainLayout';
-import { HomePage } from '@pages/Home/HomePage';
 import { GeneratePage } from '@pages/Generate/GeneratePage';
 import { HistoryPage } from '@pages/History';
+import { HomePage } from '@pages/Home/HomePage';
 
 function App() {
     return (

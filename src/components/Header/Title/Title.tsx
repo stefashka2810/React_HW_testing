@@ -1,4 +1,5 @@
 import { Typography } from '@ui/Typography';
+
 import { Logo } from './Logo';
 
 import styles from './Title.module.css';

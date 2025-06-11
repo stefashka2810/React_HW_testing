@@ -1,5 +1,6 @@
 import { useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
+
 import styles from './HomePage.module.css';
 
 export const HomePage = () => {

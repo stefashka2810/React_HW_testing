@@ -1,48 +1,48 @@
-import { useEffect, useState } from 'react';
+
 import { useNavigate } from 'react-router-dom';
-import styles from './HistoryPage.module.css';
-import { HistoryItemType } from '@utils/types';
-import { clearHistory, getHistory, removeFromHistory } from '@utils/storage';
-import { STORAGE_KEY } from '@utils/consts';
+import { useShallow } from 'zustand/react/shallow';
+
 import { HistoryItem } from '@components/common/HistoryItem';
-import { Button } from '@ui/Button';
 import { HistoryModal } from '@components/HistoryModal';
+import { useHistoryStore } from '@store/historyStore';
+import { Button } from '@ui/Button';
+import { clearHistory, removeFromHistory } from '@utils/storage';
+import { HistoryItemType } from '@utils/types';
+
+import styles from './HistoryPage.module.css';
 
 export const HistoryPage = () => {
-    const [history, setHistory] = useState(getHistory);
-    const [showModal, setShowModal] = useState(false);
-    const [selectedItem, setSelectedItem] = useState<HistoryItemType | null>(
-        null
+    const {
+        history,
+        showModal,
+        setSelectedItem,
+        clearHistoryStore,
+        removeFromHistoryStore,
+    } = useHistoryStore(
+        useShallow((state) => ({
+            showModal: state.showModal,
+            setSelectedItem: state.setSelectedItem,
+            clearHistoryStore: state.clearHistory,
+            removeFromHistoryStore: state.removeFromHistory,
+            history: state.history,
+        }))
     );
 
     const navigate = useNavigate();
 
-    useEffect(() => {
-        const storedHistory = localStorage.getItem(STORAGE_KEY);
-        if (storedHistory) {
-            setHistory(JSON.parse(storedHistory));
-        }
-    }, []);
-
     const handleClearHistory = () => {
         clearHistory();
-        setHistory([]);
+        clearHistoryStore();
     };
 
     const handleItemClick = (item: HistoryItemType) => {
         setSelectedItem(item);
-        setShowModal(true);
+        showModal();
     };
 
     const handleDeleteItem = (id: string) => {
-        const newHistory = history.filter((item) => item.id !== id);
         removeFromHistory(id);
-        setHistory(newHistory);
-    };
-
-    const handleCloseModal = () => {
-        setSelectedItem(null);
-        setShowModal(false);
+        removeFromHistoryStore(id);
     };
 
     return (
@@ -65,11 +65,7 @@ export const HistoryPage = () => {
                     Очистить всё
                 </Button>
             </div>
-            <HistoryModal
-                isOpen={showModal}
-                historyItem={selectedItem}
-                onClose={handleCloseModal}
-            />
+            <HistoryModal />
         </div>
     );
 };

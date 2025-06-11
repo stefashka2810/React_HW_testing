@@ -1,17 +1,22 @@
-import { Modal } from '@ui/Modal/Modal';
-import { HistoryItemType } from '@utils/types';
 import { FC } from 'react';
+import { useShallow } from 'zustand/react/shallow';
 
-type Props = {
-    isOpen: boolean;
-    onClose: () => void;
-    historyItem: HistoryItemType | null;
-};
+import { useHistoryStore } from '@store/historyStore';
+import { Modal } from '@ui/Modal/Modal';
 
-export const HistoryModal: FC<Props> = ({ isOpen, onClose }) => {
+
+export const HistoryModal: FC = () => {
+    const { isOpenModal, selectedItem, hideModal } = useHistoryStore(
+        useShallow((state) => ({
+            isOpenModal: state.isOpenModal,
+            selectedItem: state.selectedItem,
+            hideModal: state.hideModal,
+        }))
+    );
+
     return (
-        <Modal isOpen={isOpen} onClose={onClose}>
-            test
+        <Modal isOpen={isOpenModal} onClose={hideModal}>
+            {selectedItem?.fileName}
         </Modal>
     );
 };
