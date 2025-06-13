@@ -1,6 +1,6 @@
 import { Text } from '@components/common/Text';
-import { Logo } from './Logo';
 
+import { Logo } from './Logo';
 import styles from './Title.module.css';
 
 export const Title = () => {

@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import styles from './HistoryPage.module.css';
-import { HistoryItemType } from '@utils/types';
-import { clearHistory, getHistory, removeFromHistory } from '@utils/storage';
-import { STORAGE_KEY } from '@utils/consts';
+
 import { HistoryItem } from '@components/common/HistoryItem';
 import { Button } from '@ui/Button';
+import { STORAGE_KEY } from '@utils/consts';
+import { clearHistory, getHistory, removeFromHistory } from '@utils/storage';
+import { HistoryItemType } from '@utils/types';
+import { useNavigate } from 'react-router-dom';
+
+import styles from './HistoryPage.module.css';
 
 export const HistoryPage = () => {
     const [history, setHistory] = useState(getHistory);

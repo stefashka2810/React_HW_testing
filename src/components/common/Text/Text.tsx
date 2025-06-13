@@ -1,10 +1,11 @@
 import { PropsWithChildren } from 'react';
+
 import cn from 'classnames';
 
 import styles from './Text.module.css';
 
 type Props = {
-    color?: 'dark' | 'light' | 'purple';
+    color?: 'dark' | 'light' | 'purple' | 'error';
     size?: 'xxs' | 'xs' | 's' | 'm' | 'l' | 'xl';
     as?: 'span' | 'div' | 'p' | 'h1';
     weight?: 'light' | 'regular' | 'medium' | 'bold' | 'extrabold';

@@ -1,10 +1,11 @@
+import { FC } from 'react';
+
 import { Text } from '@components/common/Text';
 import { Smile } from '@components/icons/Smile';
 import { SmileSad } from '@components/icons/SmileSad';
-import { FC } from 'react';
+import cn from 'classnames';
 
 import styles from './Status.module.css';
-import cn from 'classnames';
 
 type Props = {
     type: 'success' | 'error';

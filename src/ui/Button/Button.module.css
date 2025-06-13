@@ -9,7 +9,6 @@
     border-radius: 25px;
     cursor: pointer;
     transition: all 0.2s ease-in-out;
-    min-width: 120px;
 }
 
 .fullWidth {
@@ -53,6 +52,18 @@
 }
 
 .clear:hover:not(.disabled) {
+    opacity: 0.8;
+}
+
+/* Основная кнопка (белая) */
+.upload {
+    background-color: var(--color-white);
+    color: var(--color-black);
+    padding: 15px 50px;
+    border-radius: 10px;
+}
+
+.upload:hover:not(.disabled) {
     opacity: 0.8;
 }
 

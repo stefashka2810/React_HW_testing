@@ -67,3 +67,7 @@
 .text-color-purple {
     color: var(--color-primary-purple);
 }
+
+.text-color-error {
+    color: var(--color-primary-error);
+}

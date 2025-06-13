@@ -1,25 +1,39 @@
 .container {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 2rem;
+    gap: 24px;
 }
 
-.dropzone {
-    width: 100%;
-    max-width: 600px;
-    height: 200px;
-    border: 2px dashed #ccc;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.title {
+    font-size: 25px;
+    text-align: center;
+}
+
+.resetButton {
+    align-self: flex-end;
+    background: none;
+    border: none;
+    color: var(--color-primary-gray);
     cursor: pointer;
-    transition: all 0.2s ease;
-    background-color: #f8f9fa;
+    font-size: 16px;
+    text-decoration: underline;
 }
 
-.dropzone:hover {
-    border-color: #007bff;
-    background-color: #e9ecef;
-} 
+.highlightsGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    width: 100%;
+}
+
+.highlightsPlaceholder {
+    text-align: center;
+    color: var(--color-accent-purple);
+    margin-top: 150px;
+}
+
+.sendButton {
+    margin: 0 auto;
+    width: fit-content;
+}
+

@@ -1,8 +1,11 @@
-import { NavLink } from 'react-router-dom';
 import { FC } from 'react';
+
 import { Text } from '@components/common/Text';
-import styles from './NavElement.module.css';
 import cn from 'classnames';
+import { NavLink } from 'react-router-dom';
+
+import styles from './NavElement.module.css';
+
 type Props = {
     to: string;
     title: string;
@@ -20,7 +23,7 @@ export const NavElement: FC<Props> = ({ to, title, icon, end = false }) => {
             end={end}
         >
             {icon}
-            <Text size="m">{title}</Text>
+            <Text size="xs">{title}</Text>
         </NavLink>
     );
 };
