@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Clear } from '@components/icons/Clear';
+import { Clear } from '@ui/icons/Clear';
 import { Button } from '@ui/Button';
 import { Typography } from '@ui/Typography';
 
@@ -37,7 +37,7 @@ export const FileDisplay: React.FC<FileDisplayProps> = ({
                 onClick={onClear}
                 disabled={isProcessing}
             >
-                <Clear />
+                <Clear size={22} />
             </Button>
         </div>
     );
