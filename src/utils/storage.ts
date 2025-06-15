@@ -1,5 +1,6 @@
+import { HistoryItemType } from '@app-types/history';
+
 import { STORAGE_KEY } from './consts';
-import { HistoryItemType } from './types';
 
 export const getHistory = (): HistoryItemType[] => {
     try {

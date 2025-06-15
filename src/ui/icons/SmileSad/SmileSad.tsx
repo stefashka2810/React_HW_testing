@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { IconBaseProps } from '@utils/types';
+import { IconBaseProps } from '@app-types/common';
 
 
 export const SmileSad: FC<IconBaseProps> = ({ color, size, ...rest }) => (

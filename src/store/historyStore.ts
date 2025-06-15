@@ -1,7 +1,5 @@
-
-
+import { HistoryItemType } from '@app-types/history';
 import { getHistory } from '@utils/storage';
-import { HistoryItemType } from '@utils/types';
 import { create } from 'zustand';
 
 type HistoryState = {

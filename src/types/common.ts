@@ -10,13 +10,6 @@ export type Highlights = {
     less_spent_civ: string; // цивилизация с минимальными расходами
 };
 
-export type HistoryItemType = {
-    id: string;
-    timestamp: number;
-    fileName: string;
-    highlights?: Highlights;
-};
-
 export type WithClassName = {
     className?: string;
 };

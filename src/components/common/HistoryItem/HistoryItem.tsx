@@ -1,15 +1,14 @@
 import { FC } from 'react';
 
+import { HistoryItemType } from '@app-types/history';
 import { Button } from '@ui/Button';
 import { File } from '@ui/icons/File';
 import { Trash } from '@ui/icons/Trash';
 import { Typography } from '@ui/Typography';
 import { formatDate } from '@utils/formateDate';
-import { HistoryItemType } from '@utils/types';
 
 import styles from './HistoryItem.module.css';
 import { Status } from './Status';
-
 
 type Props = {
     item: HistoryItemType;
