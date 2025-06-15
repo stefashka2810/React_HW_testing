@@ -55,6 +55,18 @@
     opacity: 0.8;
 }
 
+/* Основная кнопка (белая) */
+.upload {
+    background-color: var(--color-white);
+    color: var(--color-black);
+    padding: 15px 50px;
+    border-radius: 10px;
+}
+
+.upload:hover:not(.disabled) {
+    opacity: 0.8;
+}
+
 /* Состояние disabled */
 .disabled {
     opacity: 0.6;

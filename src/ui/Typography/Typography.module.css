@@ -75,3 +75,7 @@
     text-overflow: ellipsis;
     -webkit-box-orient: vertical;
 }
+
+.text-color-error {
+    color: var(--color-primary-error);
+}

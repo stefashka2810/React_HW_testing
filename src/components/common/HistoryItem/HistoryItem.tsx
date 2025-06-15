@@ -1,15 +1,15 @@
-
 import { FC } from 'react';
 
+import { Button } from '@ui/Button';
 import { File } from '@ui/icons/File';
 import { Trash } from '@ui/icons/Trash';
 import { Typography } from '@ui/Typography';
 import { formatDate } from '@utils/formateDate';
 import { HistoryItemType } from '@utils/types';
 
+import styles from './HistoryItem.module.css';
 import { Status } from './Status';
 
-import styles from './HistoryItem.module.css';
 
 type Props = {
     item: HistoryItemType;
@@ -34,7 +34,9 @@ export const HistoryItem: FC<Props> = ({ item, onClick, onDelete }) => {
 
     return (
         <div className={styles.root}>
-            <button
+            <Button
+                type="button"
+                variant="secondary"
                 className={styles.item}
                 aria-label={`Открыть хайлайты для ${fileName}`}
                 onClick={handleItemClick}
@@ -46,14 +48,16 @@ export const HistoryItem: FC<Props> = ({ item, onClick, onDelete }) => {
                 <Typography>{date}</Typography>
                 <Status type="success" isActive={hasHighlights} />
                 <Status type="error" isActive={!hasHighlights} />
-            </button>
-            <button
+            </Button>
+            <Button
+                type="button"
+                variant="clear"
                 className={styles.deleteButton}
                 aria-label={`Удалить файл ${fileName}`}
                 onClick={handleDeleteButtonClick}
             >
                 <Trash size={33} />
-            </button>
+            </Button>
         </div>
     );
 };

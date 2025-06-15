@@ -1,8 +1,8 @@
 
-import { create } from 'zustand';
 
 import { getHistory } from '@utils/storage';
 import { HistoryItemType } from '@utils/types';
+import { create } from 'zustand';
 
 type HistoryState = {
     history: HistoryItemType[];

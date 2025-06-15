@@ -1,7 +1,8 @@
 import path from 'node:path';
-import { defineConfig, loadEnv } from 'vite';
 
 import react from '@vitejs/plugin-react';
+import { defineConfig, loadEnv } from 'vite';
+
 
 
 // https://vitejs.dev/config/
@@ -23,6 +24,8 @@ export default defineConfig(({ mode }) => {
                 '@utils': path.resolve(__dirname, './src/utils'),
                 '@hooks': path.resolve(__dirname, './src/hooks'),
                 '@ui': path.resolve(__dirname, './src/ui'),
+                '@app-types': path.resolve(__dirname, './src/types'),
+                '@constants': path.resolve(__dirname, './src/constants'),
             },
         },
         plugins: [react()],

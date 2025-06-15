@@ -1,3 +1,5 @@
+import { Button } from '@ui/Button';
+
 import styles from './GeneratePage.module.css';
 
 export const GeneratePage = () => {
@@ -13,12 +15,13 @@ export const GeneratePage = () => {
     return (
         <div className={styles.container}>
             <h1>Генерация таблицы</h1>
-            <button 
+            <Button 
+                variant="primary"
                 className={styles.generateButton}
                 onClick={handleGenerate}
             >
                 Сгенерировать таблицу
-            </button>
+            </Button>
         </div>
     );
 }; 

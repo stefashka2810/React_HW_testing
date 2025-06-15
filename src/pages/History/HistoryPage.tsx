@@ -1,6 +1,4 @@
 
-import { useNavigate } from 'react-router-dom';
-import { useShallow } from 'zustand/react/shallow';
 
 import { HistoryItem } from '@components/common/HistoryItem';
 import { HistoryModal } from '@components/HistoryModal';
@@ -8,6 +6,8 @@ import { useHistoryStore } from '@store/historyStore';
 import { Button } from '@ui/Button';
 import { clearHistory, removeFromHistory } from '@utils/storage';
 import { HistoryItemType } from '@utils/types';
+import { useNavigate } from 'react-router-dom';
+import { useShallow } from 'zustand/react/shallow';
 
 import styles from './HistoryPage.module.css';
 

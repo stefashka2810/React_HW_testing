@@ -1,4 +1,6 @@
 import { useEffect } from 'react';
+
+import { Button } from '@ui/Button';
 import { createPortal } from 'react-dom';
 
 import styles from './Modal.module.css';
@@ -10,6 +12,7 @@ interface ModalProps {
     children: React.ReactNode;
 }
 
+// TODO удалить
 export const Modal = ({ isOpen, onClose, title, children }: ModalProps) => {
     useEffect(() => {
         const handleEscape = (event: KeyboardEvent) => {
@@ -39,12 +42,14 @@ export const Modal = ({ isOpen, onClose, title, children }: ModalProps) => {
             >
                 <div className={styles.header}>
                     <h2>{title}</h2>
-                    <button 
+                    <Button
+                        type="button"
+                        variant="clear"
                         className={styles.closeButton}
                         onClick={onClose}
                     >
                         ×
-                    </button>
+                    </Button>
                 </div>
                 <div className={styles.content}>
                     {children}

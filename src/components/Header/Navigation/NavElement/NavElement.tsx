@@ -1,8 +1,9 @@
 import { FC } from 'react';
-import { NavLink } from 'react-router-dom';
-import cn from 'classnames';
 
 import { Typography } from '@ui/Typography';
+import cn from 'classnames';
+import { NavLink } from 'react-router-dom';
+
 
 import styles from './NavElement.module.css';
 

@@ -1,10 +1,9 @@
 
-import { BrowserRouter as Router, Route,Routes } from 'react-router-dom';
-
 import { MainLayout } from '@layouts/MainLayout';
 import { GeneratePage } from '@pages/Generate/GeneratePage';
 import { HistoryPage } from '@pages/History';
 import { HomePage } from '@pages/Home/HomePage';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 function App() {
     return (

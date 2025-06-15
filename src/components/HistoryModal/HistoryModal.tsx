@@ -1,8 +1,9 @@
 import { FC } from 'react';
-import { useShallow } from 'zustand/react/shallow';
+
 
 import { useHistoryStore } from '@store/historyStore';
 import { Modal } from '@ui/Modal/Modal';
+import { useShallow } from 'zustand/react/shallow';
 
 
 export const HistoryModal: FC = () => {

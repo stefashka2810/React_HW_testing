@@ -29,7 +29,9 @@
             "@styles/*": ["src/styles/*"],
             "@utils/*": ["src/utils/*"],
             "@hooks/*": ["src/hooks/*"],
-            "@ui/*": ["src/ui/*"]
+            "@ui/*": ["src/ui/*"],
+            "@constants/*": ["src/constants/*"],
+            "@app-types/*": ["src/types/*"]
         }
     },
     "include": ["src"],

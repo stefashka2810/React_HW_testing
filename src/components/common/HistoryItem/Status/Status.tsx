@@ -1,10 +1,10 @@
-
 import { FC } from 'react';
-import cn from 'classnames';
+
 
 import { Smile } from '@ui/icons/Smile';
 import { SmileSad } from '@ui/icons/SmileSad';
 import { Typography } from '@ui/Typography';
+import cn from 'classnames';
 
 import styles from './Status.module.css';
 

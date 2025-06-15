@@ -20,6 +20,7 @@
     flex-shrink: 0;
     width: 87px;
     height: 87px;
+    min-width: 87px;
     background-color: var(--color-white);
     border-radius: var(--border-radius-s);
     color: var(--color-accent-orange);
