@@ -2,7 +2,6 @@ import { FC } from 'react';
 
 import { IconBaseProps } from '@app-types/common';
 
-
 export const Cross: FC<IconBaseProps> = ({ color, size, ...rest }) => (
     <svg
         width={size}

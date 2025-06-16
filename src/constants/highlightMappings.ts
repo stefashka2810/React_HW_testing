@@ -1,4 +1,4 @@
-export const API_URL = "http://localhost:3000";
+export const API_URL = 'http://localhost:3000';
 
 export const HIGHLIGHT_TITLES: Record<string, string> = {
     total_spend_galactic: 'Общие расходы',
@@ -10,4 +10,4 @@ export const HIGHLIGHT_TITLES: Record<string, string> = {
     average_spend_galactic: 'Средние расходы',
     big_spent_civ: 'Цивилизация max расходов',
     less_spent_civ: 'Цивилизация min расходов',
-}; 
+};

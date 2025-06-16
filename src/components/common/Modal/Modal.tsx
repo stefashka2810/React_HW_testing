@@ -36,10 +36,7 @@ export const Modal = ({ isOpen, onClose, title, children }: ModalProps) => {
 
     return createPortal(
         <div className={styles.overlay} onClick={onClose}>
-            <div 
-                className={styles.modal} 
-                onClick={e => e.stopPropagation()}
-            >
+            <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
                 <div className={styles.header}>
                     <h2>{title}</h2>
                     <Button
@@ -51,11 +48,9 @@ export const Modal = ({ isOpen, onClose, title, children }: ModalProps) => {
                         ×
                     </Button>
                 </div>
-                <div className={styles.content}>
-                    {children}
-                </div>
+                <div className={styles.content}>{children}</div>
             </div>
         </div>,
         document.body
     );
-}; 
+};

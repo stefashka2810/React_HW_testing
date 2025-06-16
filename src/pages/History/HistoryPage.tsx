@@ -59,9 +59,11 @@ export const HistoryPage = () => {
                 <Button variant="primary" onClick={() => navigate('/generate')}>
                     Сгенерировать больше
                 </Button>
-                <Button variant="clear" onClick={handleClearHistory}>
-                    Очистить всё
-                </Button>
+                {history.length > 0 && (
+                    <Button variant="clear" onClick={handleClearHistory}>
+                        Очистить всё
+                    </Button>
+                )}
             </div>
             <HistoryModal />
         </div>

@@ -1,7 +1,8 @@
-import { IconBaseProps } from '@app-types/common';
 import { FC } from 'react';
 
-export const Clear: FC<IconBaseProps> = ({ color, size, ...rest }) => (
+import { IconBaseProps } from '@app-types/common';
+
+export const Clear: FC<IconBaseProps> = ({ size, ...rest }) => (
     <svg
         width={size}
         height={size}

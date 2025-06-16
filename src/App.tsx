@@ -1,4 +1,3 @@
-
 import { MainLayout } from '@layouts/MainLayout';
 import { GeneratePage } from '@pages/Generate/GeneratePage';
 import { HistoryPage } from '@pages/History';

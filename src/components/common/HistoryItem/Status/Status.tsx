@@ -1,6 +1,5 @@
 import { FC } from 'react';
 
-
 import { Smile } from '@ui/icons/Smile';
 import { SmileSad } from '@ui/icons/SmileSad';
 import { Typography } from '@ui/Typography';

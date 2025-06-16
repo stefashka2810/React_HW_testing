@@ -12,7 +12,7 @@
 
 .fileName {
     font-size: 33px;
-    background-color: #CB81FF;
+    background-color: #cb81ff;
     height: 70px;
     display: flex;
     align-items: center;
@@ -21,7 +21,7 @@
 }
 
 .fileNameCompleted {
-    background-color: #D4FAE6;
+    background-color: #d4fae6;
     color: var(--color-black);
 }
 
@@ -32,4 +32,4 @@
     padding: 0;
     cursor: pointer;
     transition: background-color 0.2s;
-} 
+}

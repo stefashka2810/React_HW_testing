@@ -3,4 +3,4 @@ export interface Highlight {
     description: string;
 }
 
-export type AnalysisStatus = 'idle' | 'processing' | 'completed' | 'error'; 
+export type AnalysisStatus = 'idle' | 'processing' | 'completed' | 'error';

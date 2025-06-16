@@ -1,27 +1,112 @@
+import { useEffect, useState } from 'react';
+import classNames from 'classnames';
 import { Button } from '@ui/Button';
+import { Loader } from '@ui/Loader';
+import { API_URL } from '@constants/highlightMappings';
+import { Typography } from '@ui/Typography';
 
 import styles from './GeneratePage.module.css';
 
+// 10 мб
+const DEFAULT_SIZE = 0.01;
+
 export const GeneratePage = () => {
+    const [isGenerating, setIsGenerating] = useState(false);
+    const [error, setError] = useState<string | null>(null);
+    const [successMessage, setSuccessMessage] = useState<string | null>(null);
+
     const handleGenerate = async () => {
         try {
-            // TODO: Implement table generation
-            console.log('Generating table...');
+            setIsGenerating(true);
+            setError(null);
+
+            const response = await fetch(
+                `${API_URL}/report?size=${DEFAULT_SIZE}`,
+                {
+                    method: 'GET',
+                }
+            );
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(
+                    errorData.error
+                        ? `Произошла ошибка: ${errorData.error}`
+                        : 'Неизвестная ошибка при попытке сгенерировать отчёт'
+                );
+            }
+
+            const contentDisposition = response.headers.get(
+                'Content-Disposition'
+            );
+            const filename = contentDisposition
+                ? contentDisposition.split('filename=')[1].replace(/"/g, '')
+                : 'report.csv';
+
+            const blob = await response.blob();
+
+            const url = window.URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = filename;
+
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            window.URL.revokeObjectURL(url);
+
+            setSuccessMessage('Отчёт успешно сгенерирован!');
         } catch (error) {
-            console.error('Error generating table:', error);
+            setError(
+                error instanceof Error
+                    ? error.message
+                    : 'Неизвестная ошибка при попытке сгенерировать отчёт'
+            );
+        } finally {
+            setIsGenerating(false);
         }
     };
 
+    useEffect(() => {
+        if (!successMessage) {
+            return;
+        }
+
+        const timeout = setTimeout(() => {
+            setSuccessMessage(null);
+        }, 2000);
+
+        return () => clearTimeout(timeout);
+    }, [successMessage]);
+
     return (
         <div className={styles.container}>
-            <h1>Генерация таблицы</h1>
-            <Button 
+            <Typography as="h1" size="m" className={styles.title}>
+                Сгенерируйте готовый csv-файл нажатием одной кнопки
+            </Typography>
+
+            <Button
+                type="button"
                 variant="primary"
-                className={styles.generateButton}
+                disabled={isGenerating}
                 onClick={handleGenerate}
+                className={classNames(styles.generateButton, {
+                    [styles.isGenerating]: isGenerating,
+                })}
             >
-                Сгенерировать таблицу
+                {isGenerating ? <Loader /> : 'Начать генерацию'}
             </Button>
+
+            {successMessage && (
+                <Typography as="p" size="s">
+                    {successMessage}
+                </Typography>
+            )}
+            {error && (
+                <Typography as="p" size="s" color="error">
+                    {error}
+                </Typography>
+            )}
         </div>
     );
-}; 
+};

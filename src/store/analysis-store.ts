@@ -22,9 +22,10 @@ const initialState = {
 
 export const useAnalysisStore = create<AnalysisState>((set) => ({
     ...initialState,
-    setFile: (file) => set({ file, status: 'idle', highlights: [], error: null }),
+    setFile: (file) =>
+        set({ file, status: 'idle', highlights: [], error: null }),
     setStatus: (status) => set({ status }),
     setHighlights: (highlights) => set({ highlights }),
     setError: (error) => set({ error, status: 'error' }),
     reset: () => set(initialState),
-})); 
+}));

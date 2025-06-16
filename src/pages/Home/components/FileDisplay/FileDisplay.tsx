@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { Clear } from '@ui/icons/Clear';
 import { Button } from '@ui/Button';
+import { Clear } from '@ui/icons/Clear';
 import { Typography } from '@ui/Typography';
 
 import styles from './FileDisplay.module.css';

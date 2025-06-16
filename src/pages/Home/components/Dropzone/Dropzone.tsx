@@ -3,6 +3,7 @@ import React, { useRef, useState, useCallback } from 'react';
 import { AnalysisStatus } from '@app-types/analysis';
 import { Button } from '@ui/Button';
 import { Typography } from '@ui/Typography';
+import { Loader } from '@ui/Loader';
 
 import { FileDisplay } from '../FileDisplay';
 
@@ -83,7 +84,7 @@ export const Dropzone: React.FC<DropzoneProps> = ({
 
             if (selectedFile) {
                 onFileSelect(selectedFile);
-                e.target.value = ''; // Allow re-selecting the same file
+                e.target.value = '';
             }
         },
         [onFileSelect]
@@ -107,7 +108,7 @@ export const Dropzone: React.FC<DropzoneProps> = ({
         if (isProcessing) {
             return (
                 <div className={styles.fileProcessing}>
-                    <div className={styles.loader} />
+                    <Loader />
                 </div>
             );
         }

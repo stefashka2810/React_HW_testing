@@ -2,7 +2,6 @@ import { FC } from 'react';
 
 import { IconBaseProps } from '@app-types/common';
 
-
 export const Smile: FC<IconBaseProps> = ({ color, size, ...rest }) => (
     <svg
         width={size}
