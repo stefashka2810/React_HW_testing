@@ -10,13 +10,7 @@ import { useShallow } from 'zustand/react/shallow';
 import styles from './HistoryPage.module.css';
 
 export const HistoryPage = () => {
-    const {
-        history,
-        showModal,
-        setSelectedItem,
-        clearHistoryStore,
-        removeFromHistoryStore,
-    } = useHistoryStore(
+    const { history, showModal, setSelectedItem, clearHistoryStore, removeFromHistoryStore } = useHistoryStore(
         useShallow((state) => ({
             showModal: state.showModal,
             setSelectedItem: state.setSelectedItem,
@@ -47,12 +41,7 @@ export const HistoryPage = () => {
         <div className={styles.container}>
             <div className={styles.list}>
                 {history.map((item) => (
-                    <HistoryItem
-                        key={item.id}
-                        item={item}
-                        onClick={handleItemClick}
-                        onDelete={handleDeleteItem}
-                    />
+                    <HistoryItem key={item.id} item={item} onClick={handleItemClick} onDelete={handleDeleteItem} />
                 ))}
             </div>
             <div className={styles.actions}>

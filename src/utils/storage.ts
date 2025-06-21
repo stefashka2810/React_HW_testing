@@ -11,9 +11,7 @@ export const getHistory = (): HistoryItemType[] => {
     }
 };
 
-export const addToHistory = (
-    item: Omit<HistoryItemType, 'id' | 'timestamp'>
-) => {
+export const addToHistory = (item: Omit<HistoryItemType, 'id' | 'timestamp'>) => {
     try {
         const history = getHistory();
         const newItem: HistoryItemType = {
@@ -22,10 +20,7 @@ export const addToHistory = (
             timestamp: Date.now(),
         };
 
-        localStorage.setItem(
-            STORAGE_KEY,
-            JSON.stringify([newItem, ...history])
-        );
+        localStorage.setItem(STORAGE_KEY, JSON.stringify([newItem, ...history]));
 
         return newItem;
     } catch (error) {

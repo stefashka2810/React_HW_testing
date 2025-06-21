@@ -3,14 +3,7 @@ import { FC } from 'react';
 import { IconBaseProps } from '@app-types/common';
 
 export const Upload: FC<IconBaseProps> = ({ color, size, ...rest }) => (
-    <svg
-        width={size}
-        height={size}
-        viewBox="0 0 36 36"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        {...rest}
-    >
+    <svg width={size} height={size} viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" {...rest}>
         <path
             d="M17.4999 5.31085V22.8488"
             stroke={color ?? 'currentColor'}

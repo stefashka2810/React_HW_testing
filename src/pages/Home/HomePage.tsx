@@ -1,25 +1,17 @@
+import { Highlight } from '@app-types/analysis';
 import { useCsvAnalysis } from '@hooks/use-csv-analysis';
-import { useAnalysisStore } from '@store/analysis-store';
+import { useAnalysisStore } from '@store/analysisStore';
 import { Button } from '@ui/Button';
 import { Typography } from '@ui/Typography';
 import { addToHistory } from '@utils/storage';
 
-import { Dropzone } from './components/Dropzone';
-import { HighlightCard } from './components/HighlightCard';
+import { Dropzone } from '../../components/Dropzone';
+import { HighlightCard } from '../../components/HighlightCard';
+
 import styles from './HomePage.module.css';
 
 export const HomePage = () => {
-    const {
-        file,
-        status,
-        highlights,
-        error,
-        setFile,
-        setStatus,
-        setHighlights,
-        reset,
-        setError,
-    } = useAnalysisStore();
+    const { file, status, highlights, error, setFile, setStatus, setHighlights, reset, setError } = useAnalysisStore();
 
     const { analyzeCsv } = useCsvAnalysis({
         onData: setHighlights,
@@ -45,16 +37,10 @@ export const HomePage = () => {
     return (
         <div className={styles.container}>
             <Typography as="h1" size="m" className={styles.title}>
-                Загрузите csv файл и получите полную информацию
+                Загрузите csv файл и получите полную информацию о нём
             </Typography>
 
-            <Dropzone
-                file={file}
-                status={status}
-                error={error}
-                onFileSelect={handleFileSelect}
-                onClear={reset}
-            />
+            <Dropzone file={file} status={status} error={error} onFileSelect={handleFileSelect} onClear={reset} />
 
             {showSendButton && (
                 <Button
@@ -70,7 +56,7 @@ export const HomePage = () => {
 
             {highlights.length > 0 ? (
                 <div className={styles.highlightsGrid}>
-                    {highlights.map((highlight, index) => (
+                    {highlights.map((highlight: Highlight, index: number) => (
                         <HighlightCard key={index} highlight={highlight} />
                     ))}
                 </div>

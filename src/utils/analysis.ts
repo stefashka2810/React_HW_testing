@@ -1,14 +1,21 @@
 import { Highlight } from '@app-types/analysis';
-import { HIGHLIGHT_TITLES } from '@constants/highlightMappings';
+import { HIGHLIGHT_TITLES } from '@utils/consts';
 
+/**
+ * Custom error for invalid server responses
+ */
+export class InvalidServerResponseError extends Error {
+    constructor(message: string) {
+        super(message);
+        this.name = 'InvalidServerResponseError';
+    }
+}
 /**
  * Parses the streaming response from the server.
  * @param value The streamed data chunk.
  * @returns The first JSON object from the chunk.
  */
-const getFirstJsonObject = (
-    value: Uint8Array
-): Record<string, string | number> => {
+const getFirstJsonObject = (value: Uint8Array): Record<string, string | number> => {
     const decoder = new TextDecoder();
     const textChunk = decoder.decode(value).split('\n')[0];
     return JSON.parse(textChunk);
@@ -22,10 +29,37 @@ const getFirstJsonObject = (
 export const transformAnalysisData = (value: Uint8Array): Highlight[] => {
     const rawData = getFirstJsonObject(value);
 
+    // TODO: remove this after server validation will be fixed
+    if (!validateServerResponse(rawData)) {
+        throw new InvalidServerResponseError('Файл не был корректно обработан на сервере :(');
+    }
+
     const { rows_affected: _rows_affected, ...highlights } = rawData;
 
-    return Object.entries(highlights).map(([key, title]) => ({
-        title: String(title),
-        description: HIGHLIGHT_TITLES[key] ?? 'Неизвестный параметр',
-    }));
+    return Object.entries(highlights)
+        .filter(([key]) => HIGHLIGHT_TITLES[key])
+        .map(([key, title]) => ({
+            title: String(title),
+            description: HIGHLIGHT_TITLES[key] ?? 'Неизвестный параметр',
+        }));
+};
+
+/**
+ * Check if file is csv
+ * @param file - File to check
+ * @returns True if file is csv, false otherwise
+ */
+export const isCsvFile = (file: File): boolean => {
+    return file.name.toLowerCase().endsWith('.csv');
+};
+/**
+ * Validate server response
+ * @param rawData - Raw data from server
+ * @returns True if response is valid, false otherwise
+ */
+export const validateServerResponse = (rawData: Record<string, string | number>) => {
+    const validHighlightKeys = Object.keys(HIGHLIGHT_TITLES);
+    const responseHighlightKeys = Object.keys(rawData);
+
+    return validHighlightKeys.some((key) => responseHighlightKeys.includes(key));
 };

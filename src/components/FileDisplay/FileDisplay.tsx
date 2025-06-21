@@ -13,20 +13,11 @@ interface FileDisplayProps {
     isProcessing?: boolean;
 }
 
-export const FileDisplay: React.FC<FileDisplayProps> = ({
-    fileName,
-    onClear,
-    isCompleted,
-    isProcessing,
-}) => {
+export const FileDisplay: React.FC<FileDisplayProps> = ({ fileName, onClear, isCompleted, isProcessing }) => {
     return (
         <div className={styles.fileControls}>
             <div className={styles.fileInfo}>
-                <Typography
-                    className={`${styles.fileName} ${
-                        isCompleted ? styles.fileNameCompleted : ''
-                    }`}
-                >
+                <Typography className={`${styles.fileName} ${isCompleted ? styles.fileNameCompleted : ''}`}>
                     {fileName}
                 </Typography>
             </div>

@@ -1,10 +1,10 @@
 import { useCallback } from 'react';
 
 import { Highlight } from '@app-types/analysis';
-import { API_URL } from '@constants/highlightMappings';
-import { transformAnalysisData } from '@utils/analysis';
+import { InvalidServerResponseError, transformAnalysisData } from '@utils/analysis';
+import { API_URL } from '@utils/consts';
 
-const DEFAULT_ROWS = 1000;
+const DEFAULT_ROWS = 10000;
 
 interface CsvAnalysisParams {
     onData: (data: Highlight[]) => void;
@@ -12,35 +12,24 @@ interface CsvAnalysisParams {
     onComplete: () => void;
 }
 
-export const useCsvAnalysis = ({
-    onData,
-    onError,
-    onComplete,
-}: CsvAnalysisParams) => {
+export const useCsvAnalysis = ({ onData, onError, onComplete }: CsvAnalysisParams) => {
     const analyzeCsv = useCallback(
         async (csv: File) => {
             try {
                 const formData = new FormData();
                 formData.append('file', csv);
 
-                const response = await fetch(
-                    `${API_URL}/aggregate?rows=${DEFAULT_ROWS}`,
-                    {
-                        method: 'POST',
-                        body: formData,
-                    }
-                );
+                const response = await fetch(`${API_URL}/aggregate?rows=${DEFAULT_ROWS}`, {
+                    method: 'POST',
+                    body: formData,
+                });
 
                 if (!response.body) {
-                    throw new Error('Response body is empty');
+                    throw new Error('Пустой ответ от сервера :(');
                 }
 
                 if (!response.ok) {
-                    throw new Error(
-                        response.statusText
-                            ? `Произошла ошибка: ${response.statusText}`
-                            : 'Неизвестная ошибка при попытке обработать файл'
-                    );
+                    throw new Error('Неизвестная ошибка при попытке обработать файл :(');
                 }
 
                 const reader = response.body.getReader();
@@ -60,13 +49,12 @@ export const useCsvAnalysis = ({
                     }
                 }
             } catch (error) {
-                onError(
-                    new Error(
-                        error instanceof Error
-                            ? error.message
-                            : 'Неизвестная ошибка парсинга :('
-                    )
-                );
+                if (error instanceof InvalidServerResponseError) {
+                    onError(error);
+                    return;
+                }
+
+                onError(new Error('Неизвестная ошибка парсинга :('));
             }
         },
         [onData, onError, onComplete]

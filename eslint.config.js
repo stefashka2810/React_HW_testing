@@ -1,4 +1,5 @@
 import pluginJs from "@eslint/js";
+import prettierConfig from "eslint-config-prettier";
 import pluginImport from "eslint-plugin-import";
 import pluginReact from "eslint-plugin-react";
 import pluginReactHooks from "eslint-plugin-react-hooks";
@@ -21,6 +22,7 @@ export default [
   },
   pluginJs.configs.recommended,
   ...tseslint.configs.recommended,
+  prettierConfig,
   {
     plugins: {
       react: pluginReact,

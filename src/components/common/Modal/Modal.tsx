@@ -39,12 +39,7 @@ export const Modal = ({ isOpen, onClose, title, children }: ModalProps) => {
             <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
                 <div className={styles.header}>
                     <h2>{title}</h2>
-                    <Button
-                        type="button"
-                        variant="clear"
-                        className={styles.closeButton}
-                        onClick={onClose}
-                    >
+                    <Button type="button" variant="clear" className={styles.closeButton} onClick={onClose}>
                         ×
                     </Button>
                 </div>

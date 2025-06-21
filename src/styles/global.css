@@ -18,6 +18,11 @@
     --color-primary-gray: #787878;
     --color-primary-error: #c51e1e;
 
+    --color-state-active-bg: #e0f2f1;
+    --color-state-active-border: #4db6ac;
+    --color-state-reject-bg: #ffebee;
+    --color-state-reject-border: #ef5350;
+
     --color-black-transparent: rgba(6, 6, 6, 0.3);
 
     --z-index-modal: 2;

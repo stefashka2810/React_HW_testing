@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
-import classNames from 'classnames';
+
 import { Button } from '@ui/Button';
 import { Loader } from '@ui/Loader';
-import { API_URL } from '@constants/highlightMappings';
 import { Typography } from '@ui/Typography';
+import { API_URL } from '@utils/consts';
+import classNames from 'classnames';
 
 import styles from './GeneratePage.module.css';
 
@@ -20,12 +21,9 @@ export const GeneratePage = () => {
             setIsGenerating(true);
             setError(null);
 
-            const response = await fetch(
-                `${API_URL}/report?size=${DEFAULT_SIZE}`,
-                {
-                    method: 'GET',
-                }
-            );
+            const response = await fetch(`${API_URL}/report?size=${DEFAULT_SIZE}`, {
+                method: 'GET',
+            });
 
             if (!response.ok) {
                 const errorData = await response.json();
@@ -36,9 +34,7 @@ export const GeneratePage = () => {
                 );
             }
 
-            const contentDisposition = response.headers.get(
-                'Content-Disposition'
-            );
+            const contentDisposition = response.headers.get('Content-Disposition');
             const filename = contentDisposition
                 ? contentDisposition.split('filename=')[1].replace(/"/g, '')
                 : 'report.csv';
@@ -57,11 +53,7 @@ export const GeneratePage = () => {
 
             setSuccessMessage('Отчёт успешно сгенерирован!');
         } catch (error) {
-            setError(
-                error instanceof Error
-                    ? error.message
-                    : 'Неизвестная ошибка при попытке сгенерировать отчёт'
-            );
+            setError(error instanceof Error ? error.message : 'Неизвестная ошибка при попытке сгенерировать отчёт');
         } finally {
             setIsGenerating(false);
         }

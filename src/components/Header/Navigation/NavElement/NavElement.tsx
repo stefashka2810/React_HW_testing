@@ -17,9 +17,7 @@ export const NavElement: FC<Props> = ({ to, title, icon, end = false }) => {
     return (
         <NavLink
             to={to}
-            className={({ isActive }: { isActive: boolean }) =>
-                cn(styles.root, { [styles.active]: isActive })
-            }
+            className={({ isActive }: { isActive: boolean }) => cn(styles.root, { [styles.active]: isActive })}
             end={end}
         >
             {icon}

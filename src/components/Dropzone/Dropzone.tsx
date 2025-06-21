@@ -2,8 +2,9 @@ import React, { useRef, useState, useCallback } from 'react';
 
 import { AnalysisStatus } from '@app-types/analysis';
 import { Button } from '@ui/Button';
-import { Typography } from '@ui/Typography';
 import { Loader } from '@ui/Loader';
+import { Typography } from '@ui/Typography';
+import { isCsvFile } from '@utils/analysis';
 
 import { FileDisplay } from '../FileDisplay';
 
@@ -17,14 +18,9 @@ interface DropzoneProps {
     onClear: () => void;
 }
 
-export const Dropzone: React.FC<DropzoneProps> = ({
-    file,
-    status,
-    error,
-    onFileSelect,
-    onClear,
-}) => {
+export const Dropzone: React.FC<DropzoneProps> = ({ file, status, error, onFileSelect, onClear }) => {
     const [isDragActive, setIsDragActive] = useState(false);
+    const [validationError, setValidationError] = useState<string | null>(null);
     const inputRef = useRef<HTMLInputElement | null>(null);
 
     const isProcessing = status === 'processing';
@@ -39,6 +35,7 @@ export const Dropzone: React.FC<DropzoneProps> = ({
             }
 
             setIsDragActive(true);
+            setValidationError(null);
         },
         [isProcessing]
     );
@@ -54,9 +51,18 @@ export const Dropzone: React.FC<DropzoneProps> = ({
     const handleDragLeave = useCallback((e: React.DragEvent) => {
         e.preventDefault();
         e.stopPropagation();
-
         setIsDragActive(false);
     }, []);
+
+    const handleFileSelect = (selectedFile: File) => {
+        if (!isCsvFile(selectedFile)) {
+            setValidationError('Можно загружать только *.csv файлы');
+            return;
+        }
+
+        setValidationError(null);
+        onFileSelect(selectedFile);
+    };
 
     const handleDrop = useCallback(
         (e: React.DragEvent) => {
@@ -72,7 +78,7 @@ export const Dropzone: React.FC<DropzoneProps> = ({
             const droppedFile = e.dataTransfer.files?.[0];
 
             if (droppedFile) {
-                onFileSelect(droppedFile);
+                handleFileSelect(droppedFile);
             }
         },
         [isProcessing, onFileSelect]
@@ -83,23 +89,22 @@ export const Dropzone: React.FC<DropzoneProps> = ({
             const selectedFile = e.target.files?.[0];
 
             if (selectedFile) {
-                onFileSelect(selectedFile);
+                handleFileSelect(selectedFile);
                 e.target.value = '';
             }
         },
         [onFileSelect]
     );
 
-    const handleUploadClick = useCallback(
-        (e: React.MouseEvent<HTMLButtonElement>) => {
-            e.stopPropagation();
-            inputRef.current?.click();
-        },
-        []
-    );
+    const handleUploadClick = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
+        e.stopPropagation();
+        setValidationError(null);
+        inputRef.current?.click();
+    }, []);
 
     const handleZoneClick = useCallback(() => {
         if (!file && !isProcessing) {
+            setValidationError(null);
             inputRef.current?.click();
         }
     }, [file, isProcessing]);
@@ -138,28 +143,32 @@ export const Dropzone: React.FC<DropzoneProps> = ({
     };
 
     const renderStatusText = () => {
+        if (validationError) {
+            return <Typography color="error">{validationError}</Typography>;
+        }
         if (isProcessing) {
             return 'идёт парсинг файла';
         }
-
         if (status === 'completed') {
             return 'готово!';
         }
-
         if (error) {
             return <Typography color="error">{error}</Typography>;
         }
-
         if (file) {
             return 'файл загружен!';
         }
-
-        return 'или перетащите сюда';
+        if (isDragActive) {
+            return 'Отпустите для загрузки';
+        }
+        return 'или перетащите сюда .csv файл';
     };
+
+    const dropzoneClassName = `${styles.dropzone} ${isDragActive ? styles.dragActive : ''} ${validationError ? styles.dragReject : ''}`;
 
     return (
         <div
-            className={`${styles.dropzone} ${isDragActive ? styles.dragActive : ''}`}
+            className={dropzoneClassName}
             onDragEnter={handleDragEnter}
             onDragOver={handleDragOver}
             onDragLeave={handleDragLeave}
@@ -168,13 +177,7 @@ export const Dropzone: React.FC<DropzoneProps> = ({
             role="button"
             tabIndex={0}
         >
-            <input
-                type="file"
-                accept=".csv"
-                ref={inputRef}
-                onChange={handleInputChange}
-                hidden
-            />
+            <input type="file" accept=".csv" ref={inputRef} onChange={handleInputChange} hidden />
 
             {renderContent()}
 

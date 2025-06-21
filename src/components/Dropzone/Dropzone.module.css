@@ -9,11 +9,20 @@
     gap: 10px;
     position: relative;
     cursor: pointer;
-    transition: background-color 0.2s;
+    transition:
+        background-color 0.2s,
+        border-color 0.2s;
+    border: 2px dashed transparent;
 }
 
 .dragActive {
-    background-color: #b2ebcd;
+    background-color: var(--color-state-active-bg);
+    border-color: var(--color-state-active-border);
+}
+
+.dragReject {
+    background-color: var(--color-state-reject-bg);
+    border-color: var(--color-state-reject-border);
 }
 
 .fileProcessing {

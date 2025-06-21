@@ -24,11 +24,7 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, children, onClose }) => {
                 <div className={styles.modal}>
                     <div className={styles.modalHeader}>
                         {onClose && (
-                            <Button
-                                variant="clear"
-                                className={styles.closeButton}
-                                onClick={onClose}
-                            >
+                            <Button variant="clear" className={styles.closeButton} onClick={onClose}>
                                 <Cross size={32} />
                             </Button>
                         )}
