@@ -1,6 +1,7 @@
 import { useCallback } from 'react';
 
 import { Highlight } from '@app-types/analysis';
+import { Highlights } from '@app-types/common';
 import { InvalidServerResponseError, transformAnalysisData } from '@utils/analysis';
 import { API_URL } from '@utils/consts';
 
@@ -9,7 +10,7 @@ const DEFAULT_ROWS = 10000;
 interface CsvAnalysisParams {
     onData: (data: Highlight[]) => void;
     onError: (error: Error) => void;
-    onComplete: () => void;
+    onComplete: (highlights?: Highlights) => void;
 }
 
 export const useCsvAnalysis = ({ onData, onError, onComplete }: CsvAnalysisParams) => {
@@ -35,17 +36,20 @@ export const useCsvAnalysis = ({ onData, onError, onComplete }: CsvAnalysisParam
                 const reader = response.body.getReader();
                 let isDone = false;
 
+                let highlights: Highlights | undefined = undefined;
+
                 while (!isDone) {
                     const { done, value } = await reader.read();
 
                     isDone = done;
                     if (done) {
-                        onComplete();
+                        onComplete(highlights);
                         break;
                     }
                     if (value) {
-                        const highlights = transformAnalysisData(value);
-                        onData(highlights);
+                        const { highlights: highlightsFromApi, highlightsToStore } = transformAnalysisData(value);
+                        highlights = highlightsFromApi;
+                        onData(highlightsToStore);
                     }
                 }
             } catch (error) {

@@ -1,7 +1,7 @@
 import { MainLayout } from '@layouts/MainLayout';
-import { GeneratePage } from '@pages/Generate/GeneratePage';
+import { GeneratePage } from '@pages/Generate';
 import { HistoryPage } from '@pages/History';
-import { HomePage } from '@pages/Home/HomePage';
+import { HomePage } from '@pages/Home';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 function App() {

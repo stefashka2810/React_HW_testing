@@ -1,6 +1,8 @@
 import { Highlight } from '@app-types/analysis';
 import { HIGHLIGHT_TITLES } from '@utils/consts';
 
+import { Highlights } from '../types/common';
+
 /**
  * Custom error for invalid server responses
  */
@@ -22,11 +24,17 @@ const getFirstJsonObject = (value: Uint8Array): Record<string, string | number> 
 };
 
 /**
- * Transforms the raw API response into an array of Highlight objects.
- * @param rawData The raw data object from the API.
- * @returns An array of formatted highlights.
+ * Преобразует потоковые данные API в объект хайлайтов.
+ * @param value Потоковые данные в формате Uint8Array.
+ * @returns.highlights Сырые данные хайлайтов в формате Highlights.
+ * @returns.highlightsToStore Массив отформатированных объектов Highlight с полями title и description.
  */
-export const transformAnalysisData = (value: Uint8Array): Highlight[] => {
+export const transformAnalysisData = (
+    value: Uint8Array
+): {
+    highlights: Highlights;
+    highlightsToStore: Highlight[];
+} => {
     const rawData = getFirstJsonObject(value);
 
     // TODO: remove this after server validation will be fixed
@@ -36,12 +44,21 @@ export const transformAnalysisData = (value: Uint8Array): Highlight[] => {
 
     const { rows_affected: _rows_affected, ...highlights } = rawData;
 
-    return Object.entries(highlights)
-        .filter(([key]) => HIGHLIGHT_TITLES[key])
-        .map(([key, title]) => ({
-            title: String(title),
-            description: HIGHLIGHT_TITLES[key] ?? 'Неизвестный параметр',
-        }));
+    const highlightsToStore = convertHighlightsToArray(highlights as Highlights);
+
+    return { highlights: highlights as Highlights, highlightsToStore };
+};
+
+/**
+ * Преобразует объект Highlights в массив объектов Highlight.
+ * @param highlights Объект с данными хайлайтов типа Highlights.
+ * @returns Массив объектов Highlight с полями title и description.
+ */
+export const convertHighlightsToArray = (highlights: Highlights): Highlight[] => {
+    return Object.entries(highlights).map(([key, title]) => ({
+        title: String(title),
+        description: HIGHLIGHT_TITLES[key] ?? 'Неизвестный параметр',
+    }));
 };
 
 /**

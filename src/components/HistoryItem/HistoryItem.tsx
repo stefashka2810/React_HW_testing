@@ -1,14 +1,17 @@
 import { FC } from 'react';
 
+
 import { HistoryItemType } from '@app-types/history';
 import { Button } from '@ui/Button';
 import { File } from '@ui/icons/File';
 import { Trash } from '@ui/icons/Trash';
 import { Typography } from '@ui/Typography';
 import { formatDate } from '@utils/formateDate';
+import classNames from 'classnames';
+
+import { Status } from '../Status';
 
 import styles from './HistoryItem.module.css';
-import { Status } from './Status';
 
 type Props = {
     item: HistoryItemType;
@@ -28,6 +31,10 @@ export const HistoryItem: FC<Props> = ({ item, onClick, onDelete }) => {
     };
 
     const handleItemClick = () => {
+        if (!hasHighlights) {
+            return;
+        }
+
         onClick(item);
     };
 
@@ -36,7 +43,7 @@ export const HistoryItem: FC<Props> = ({ item, onClick, onDelete }) => {
             <Button
                 type="button"
                 variant="secondary"
-                className={styles.item}
+                className={classNames(styles.item, { [styles.disabled]: !hasHighlights })}
                 aria-label={`Открыть хайлайты для ${fileName}`}
                 onClick={handleItemClick}
             >

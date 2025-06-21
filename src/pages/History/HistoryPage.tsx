@@ -1,5 +1,7 @@
+import { useEffect } from 'react';
+
 import { HistoryItemType } from '@app-types/history';
-import { HistoryItem } from '@components/common/HistoryItem';
+import { HistoryItem } from '@components/HistoryItem';
 import { HistoryModal } from '@components/HistoryModal';
 import { useHistoryStore } from '@store/historyStore';
 import { Button } from '@ui/Button';
@@ -10,17 +12,23 @@ import { useShallow } from 'zustand/react/shallow';
 import styles from './HistoryPage.module.css';
 
 export const HistoryPage = () => {
-    const { history, showModal, setSelectedItem, clearHistoryStore, removeFromHistoryStore } = useHistoryStore(
+    const { history, showModal, setSelectedItem, clearHistoryStore, removeFromHistoryStore, updateHistoryFromStorage } = useHistoryStore(
         useShallow((state) => ({
             showModal: state.showModal,
             setSelectedItem: state.setSelectedItem,
             clearHistoryStore: state.clearHistory,
             removeFromHistoryStore: state.removeFromHistory,
             history: state.history,
+            updateHistoryFromStorage: state.updateHistoryFromStorage,
         }))
     );
 
     const navigate = useNavigate();
+
+    useEffect(() => {
+        // Обновляем zustand store из localStorage при монтировании
+        updateHistoryFromStorage();
+    }, [updateHistoryFromStorage]);
 
     const handleClearHistory = () => {
         clearHistory();

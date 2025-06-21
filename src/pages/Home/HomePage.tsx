@@ -1,21 +1,30 @@
 import { Highlight } from '@app-types/analysis';
+import { Highlights } from '@app-types/common';
+import { Dropzone } from '@components/Dropzone';
+import { HighlightCard } from '@components/HighlightCard';
 import { useCsvAnalysis } from '@hooks/use-csv-analysis';
 import { useAnalysisStore } from '@store/analysisStore';
 import { Button } from '@ui/Button';
 import { Typography } from '@ui/Typography';
 import { addToHistory } from '@utils/storage';
 
-import { Dropzone } from '../../components/Dropzone';
-import { HighlightCard } from '../../components/HighlightCard';
 
 import styles from './HomePage.module.css';
 
 export const HomePage = () => {
     const { file, status, highlights, error, setFile, setStatus, setHighlights, reset, setError } = useAnalysisStore();
 
+    const onComplete = (highlights?: Highlights) => {
+        setStatus('completed');
+
+        if (file) {
+            addToHistory({ fileName: file.name, highlights });
+        }
+    };
+
     const { analyzeCsv } = useCsvAnalysis({
         onData: setHighlights,
-        onComplete: () => setStatus('completed'),
+        onComplete,
         onError: (error) => setError(error.message),
     });
 
@@ -28,7 +37,6 @@ export const HomePage = () => {
 
         setStatus('processing');
         await analyzeCsv(file);
-        addToHistory({ fileName: file.name });
     };
 
     const isProcessing = status === 'processing';

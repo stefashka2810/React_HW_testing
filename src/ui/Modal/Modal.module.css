@@ -36,12 +36,6 @@
     transform: translateY(0);
 }
 
-.modalHeader {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
 .closeButton {
     position: absolute;
     top: -45px;
