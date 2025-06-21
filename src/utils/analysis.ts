@@ -56,7 +56,7 @@ export const transformAnalysisData = (
  */
 export const convertHighlightsToArray = (highlights: Highlights): Highlight[] => {
     return Object.entries(highlights).map(([key, title]) => ({
-        title: String(title),
+        title: typeof title === 'number' ? String(Math.round(title)) : String(title),
         description: HIGHLIGHT_TITLES[key] ?? 'Неизвестный параметр',
     }));
 };
