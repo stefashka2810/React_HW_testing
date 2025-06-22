@@ -6,10 +6,7 @@ import { PersistOptions } from 'zustand/middleware';
  * @param persistedKeys - ключи состояния, которые нужно сохранять
  * @returns PersistOptions
  */
-export function createPersistConfig<T extends object>(
-    name: string,
-    persistedKeys: (keyof T)[]
-): PersistOptions<T, T> {
+export function createPersistConfig<T extends object>(name: string, persistedKeys: (keyof T)[]): PersistOptions<T, T> {
     return {
         name,
         partialize: (state) =>

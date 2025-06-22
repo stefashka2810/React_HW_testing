@@ -31,6 +31,7 @@
     align-items: center;
     gap: 5px;
     width: 350px;
+    color: var(--color-black);
 }
 
 .icon {

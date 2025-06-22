@@ -8,7 +8,6 @@ import { Button } from '@ui/Button';
 import { Typography } from '@ui/Typography';
 import { addToHistory } from '@utils/storage';
 
-
 import styles from './HomePage.module.css';
 
 export const HomePage = () => {
@@ -22,10 +21,18 @@ export const HomePage = () => {
         }
     };
 
+    const onError = (error: Error) => {
+        setError(error.message);
+
+        if (file) {
+            addToHistory({ fileName: file.name });
+        }
+    };
+
     const { analyzeCsv } = useCsvAnalysis({
         onData: setHighlights,
         onComplete,
-        onError: (error) => setError(error.message),
+        onError,
     });
 
     const handleFileSelect = (selectedFile: File) => {

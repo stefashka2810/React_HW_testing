@@ -15,4 +15,4 @@ export const createSharedSlice: SharedSliceCreator = (set) => ({
             false,
             'shared/reset'
         ),
-}); 
+});

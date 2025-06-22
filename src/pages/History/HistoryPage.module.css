@@ -4,12 +4,6 @@
     gap: 37.5px;
 }
 
-.list {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
-
 .actions {
     align-self: center;
     display: flex;

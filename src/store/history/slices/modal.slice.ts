@@ -8,4 +8,4 @@ export const createModalSlice: ModalSliceCreator = (set) => ({
     isOpenModal: false,
     showModal: () => set({ isOpenModal: true }, false, 'modal/showModal'),
     hideModal: () => set({ isOpenModal: false }, false, 'modal/hideModal'),
-}); 
+});

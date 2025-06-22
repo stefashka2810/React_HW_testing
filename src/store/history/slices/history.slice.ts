@@ -1,4 +1,3 @@
-
 import { HistoryItemType } from '@app-types/history';
 import { getHistory } from '@utils/storage';
 import { StateCreator } from 'zustand';

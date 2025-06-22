@@ -1,6 +1,5 @@
 import { FC } from 'react';
 
-
 import { HistoryItemType } from '@app-types/history';
 import { Button } from '@ui/Button';
 import { File } from '@ui/icons/File';
@@ -9,7 +8,7 @@ import { Typography } from '@ui/Typography';
 import { formatDate } from '@utils/formateDate';
 import classNames from 'classnames';
 
-import { Status } from '../Status';
+import { FileStatus } from '../FileStatus';
 
 import styles from './HistoryItem.module.css';
 
@@ -52,8 +51,8 @@ export const HistoryItem: FC<Props> = ({ item, onClick, onDelete }) => {
                     <Typography maxRowsNumber={1}>{fileName}</Typography>
                 </div>
                 <Typography>{date}</Typography>
-                <Status type="success" isActive={hasHighlights} />
-                <Status type="error" isActive={!hasHighlights} />
+                <FileStatus type="success" isActive={hasHighlights} />
+                <FileStatus type="error" isActive={!hasHighlights} />
             </Button>
             <Button
                 type="button"

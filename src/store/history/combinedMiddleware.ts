@@ -8,4 +8,4 @@ import { HistoryState } from './types';
 
 export const withMiddlewares = (config: StateCreator<HistoryState>) => {
     return logger(devtools(persist(config, historyPersistConfig), { name: 'HistoryStore' }), 'HistoryStore');
-}; 
+};
