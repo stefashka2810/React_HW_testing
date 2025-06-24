@@ -1,9 +1,9 @@
 import { FC } from 'react';
 
-import { Highlight } from '@app-types/analysis';
+import { AnalysisHighlight } from '@app-types/analysis';
 import { HighlightCard } from '@components/HighlightCard';
 import { useHistoryStore } from '@store/historyStore';
-import { Modal } from '@ui/Modal/Modal';
+import { Modal } from '@ui/Modal';
 import { convertHighlightsToArray } from '@utils/analysis';
 import { useShallow } from 'zustand/react/shallow';
 
@@ -22,7 +22,7 @@ export const HistoryModal: FC = () => {
         return null;
     }
 
-    const hightlights: Highlight[] = convertHighlightsToArray(selectedItem.highlights);
+    const hightlights: AnalysisHighlight[] = convertHighlightsToArray(selectedItem.highlights);
 
     return (
         <Modal isOpen={isOpenModal} onClose={hideModal}>

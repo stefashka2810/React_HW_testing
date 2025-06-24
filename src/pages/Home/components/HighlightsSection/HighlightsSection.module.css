@@ -1,0 +1,12 @@
+.highlightsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-top: 32px;
+}
+
+.highlightsPlaceholder {
+    margin-top: 32px;
+    text-align: center;
+    color: var(--color-accent-purple);
+} 

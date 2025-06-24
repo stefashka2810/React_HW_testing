@@ -29,4 +29,9 @@ export type IconBaseProps = {
      * Текст при наведении мышки
      */
     title?: string;
+
+    /**
+     * Дочерние элементы
+     */
+    children?: React.ReactNode;
 } & React.ComponentPropsWithoutRef<'svg'>;

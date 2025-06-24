@@ -1,15 +1,17 @@
-import { Highlight } from '@app-types/analysis';
+
 import { Highlights } from '@app-types/common';
-import { Dropzone } from '@components/Dropzone';
-import { HighlightCard } from '@components/HighlightCard';
 import { useCsvAnalysis } from '@hooks/use-csv-analysis';
 import { useAnalysisStore } from '@store/analysisStore';
-import { Button } from '@ui/Button';
 import { Typography } from '@ui/Typography';
 import { addToHistory } from '@utils/storage';
 
+import { FileUploadSection } from './components/FileUploadSection';
+import { HighlightsSection } from './components/HighlightsSection';
 import styles from './HomePage.module.css';
 
+/**
+ * Главная страница приложения для анализа CSV файлов
+ */
 export const HomePage = () => {
     const { file, status, highlights, error, setFile, setStatus, setHighlights, reset, setError } = useAnalysisStore();
 
@@ -40,14 +42,13 @@ export const HomePage = () => {
     };
 
     const handleSend = async () => {
-        if (!file || status === 'processing') return;
+        if (!file || status === 'processing') {
+            return
+        };
 
         setStatus('processing');
         await analyzeCsv(file);
     };
-
-    const isProcessing = status === 'processing';
-    const showSendButton = file && !isProcessing && status !== 'completed';
 
     return (
         <div className={styles.container}>
@@ -55,31 +56,16 @@ export const HomePage = () => {
                 Загрузите csv файл и получите полную информацию о нём
             </Typography>
 
-            <Dropzone file={file} status={status} error={error} onFileSelect={handleFileSelect} onClear={reset} />
+            <FileUploadSection
+                file={file}
+                status={status}
+                error={error}
+                onFileSelect={handleFileSelect}
+                onSend={handleSend}
+                onClear={reset}
+            />
 
-            {showSendButton && (
-                <Button
-                    type="button"
-                    variant="primary"
-                    disabled={!file}
-                    onClick={handleSend}
-                    className={styles.sendButton}
-                >
-                    Отправить
-                </Button>
-            )}
-
-            {highlights.length > 0 ? (
-                <div className={styles.highlightsGrid}>
-                    {highlights.map((highlight: Highlight, index: number) => (
-                        <HighlightCard key={index} highlight={highlight} />
-                    ))}
-                </div>
-            ) : (
-                <Typography size="l" className={styles.highlightsPlaceholder}>
-                    Здесь появятся хайлайты
-                </Typography>
-            )}
+            <HighlightsSection highlights={highlights} />
         </div>
     );
 };

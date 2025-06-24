@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 
-import { Highlight } from '@app-types/analysis';
+import { AnalysisHighlight } from '@app-types/analysis';
 import { Highlights } from '@app-types/common';
 import { InvalidServerResponseError, transformAnalysisData } from '@utils/analysis';
 import { API_URL } from '@utils/consts';
@@ -8,7 +8,7 @@ import { API_URL } from '@utils/consts';
 const DEFAULT_ROWS = 10000;
 
 interface CsvAnalysisParams {
-    onData: (data: Highlight[]) => void;
+    onData: (data: AnalysisHighlight[]) => void;
     onError: (error: Error) => void;
     onComplete: (highlights?: Highlights) => void;
 }

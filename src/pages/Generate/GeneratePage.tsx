@@ -4,7 +4,7 @@ import { Button } from '@ui/Button';
 import { Loader } from '@ui/Loader';
 import { Typography } from '@ui/Typography';
 import { API_URL } from '@utils/consts';
-import classNames from 'classnames';
+import cn from 'classnames';
 
 import styles from './GeneratePage.module.css';
 
@@ -82,7 +82,7 @@ export const GeneratePage = () => {
                 variant="primary"
                 disabled={isGenerating}
                 onClick={handleGenerate}
-                className={classNames(styles.generateButton, {
+                className={cn(styles.generateButton, {
                     [styles.isGenerating]: isGenerating,
                 })}
             >

@@ -1,19 +1,19 @@
-import React from 'react';
+import { FC } from 'react';
 
-import { Highlight } from '@app-types/analysis';
+import { AnalysisHighlight } from '@app-types/analysis';
 import { WithClassName } from '@app-types/common';
 import { Typography } from '@ui/Typography';
-import classNames from 'classnames';
+import cn from 'classnames';
 
 import styles from './HighlightCard.module.css';
 
-type HighlightCardProps = {
-    highlight: Highlight;
-} & WithClassName;
+type Props = WithClassName & {
+    highlight: AnalysisHighlight;
+};
 
-export const HighlightCard: React.FC<HighlightCardProps> = ({ highlight, className }) => {
+export const HighlightCard: FC<Props> = ({ highlight, className }) => {
     return (
-        <div className={classNames(styles.highlightCard, className)}>
+        <div className={cn(styles.highlightCard, className)}>
             <Typography size="xl" weight="medium">
                 {highlight.title}
             </Typography>

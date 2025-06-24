@@ -1,18 +1,18 @@
-import React, { ButtonHTMLAttributes } from 'react';
+import React, { ButtonHTMLAttributes, FC } from 'react';
 
-import classNames from 'classnames';
+import cn from 'classnames';
 
 import styles from './Button.module.css';
 
 type Variant = 'primary' | 'secondary' | 'download' | 'upload' | 'clear';
 
-type Props = {
+type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
     variant?: Variant;
-    children: React.ReactNode;
     fullWidth?: boolean;
-} & ButtonHTMLAttributes<HTMLButtonElement>;
+    children: React.ReactNode;
+};
 
-export const Button: React.FC<Props> = ({
+export const Button: FC<Props> = ({
     variant = 'primary',
     children,
     fullWidth = false,
@@ -22,7 +22,7 @@ export const Button: React.FC<Props> = ({
 }) => {
     return (
         <button
-            className={classNames(
+            className={cn(
                 styles.button,
                 styles[variant],
                 {

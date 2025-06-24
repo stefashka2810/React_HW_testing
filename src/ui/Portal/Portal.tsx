@@ -2,11 +2,11 @@ import { FC, PropsWithChildren } from 'react';
 
 import { createPortal } from 'react-dom';
 
-type PortalProps = {
+type Props = PropsWithChildren & {
     mountElement?: HTMLElement | null;
-} & PropsWithChildren;
+};
 
-export const Portal: FC<PortalProps> = ({ children, mountElement }) => {
+export const Portal: FC<Props> = ({ children, mountElement }) => {
     const element = mountElement ?? document.body;
 
     return createPortal(children, element);

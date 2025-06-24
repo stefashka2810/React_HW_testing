@@ -1,19 +1,19 @@
-import React, { PropsWithChildren } from 'react';
+import React, { FC, PropsWithChildren } from 'react';
 
 import { Button } from '@ui/Button';
 import { Cross } from '@ui/icons/Cross';
-import classNames from 'classnames';
+import cn from 'classnames';
 
 import { Portal } from '../Portal';
 
 import styles from './Modal.module.css';
 
-type ModalProps = {
+type Props = PropsWithChildren & {
     isOpen: boolean;
     onClose?: () => void;
-} & PropsWithChildren;
+};
 
-export const Modal: React.FC<ModalProps> = ({ isOpen, children, onClose }) => {
+export const Modal: FC<Props> = ({ isOpen, children, onClose }) => {
     const handleBackdropClick = (e: React.MouseEvent) => {
         if (e.target === e.currentTarget && onClose) {
             onClose();
@@ -27,7 +27,7 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, children, onClose }) => {
     return (
         <Portal>
             <div
-                className={classNames(styles.backdrop, {
+                className={cn(styles.backdrop, {
                     [styles.backdropShown]: isOpen,
                 })}
                 onClick={handleBackdropClick}

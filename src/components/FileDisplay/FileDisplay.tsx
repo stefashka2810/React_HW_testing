@@ -1,30 +1,33 @@
-import React from 'react';
+import { FC } from 'react';
 
 import { Button } from '@ui/Button';
 import { Clear } from '@ui/icons/Clear';
 import { Typography } from '@ui/Typography';
+import cn from 'classnames';
 
 import styles from './FileDisplay.module.css';
 
-interface FileDisplayProps {
+type Props = {
     fileName: string;
-    onClear: () => void;
     isCompleted?: boolean;
     isProcessing?: boolean;
-}
+    onClear: () => void;
+};
 
-export const FileDisplay: React.FC<FileDisplayProps> = ({ fileName, onClear, isCompleted, isProcessing }) => {
+export const FileDisplay: FC<Props> = ({ fileName, onClear, isCompleted, isProcessing }) => {
     return (
         <div className={styles.fileControls}>
             <div className={styles.fileInfo}>
-                <Typography className={`${styles.fileName} ${isCompleted ? styles.fileNameCompleted : ''}`}>
+                <Typography className={cn(styles.fileName, {
+                    [styles.fileNameCompleted]: isCompleted
+                })}>
                     {fileName}
                 </Typography>
             </div>
             <Button
                 type="button"
                 variant="clear"
-                className={`${styles.clearFileButton} ${styles.customBorder}`}
+                className={cn(styles.clearFileButton, styles.customBorder)}
                 onClick={onClear}
                 disabled={isProcessing}
             >

@@ -1,6 +1,6 @@
 import { StateCreator } from 'zustand';
 
-import { AnalysisState, IFileSlice } from './types';
+import { AnalysisState, IFileSlice } from '../types';
 
 // Явно определяем, что `set` может принимать имя экшена
 type FileSliceCreator = StateCreator<AnalysisState, [['zustand/devtools', never]], [], IFileSlice>;
@@ -8,6 +8,6 @@ type FileSliceCreator = StateCreator<AnalysisState, [['zustand/devtools', never]
 export const createFileSlice: FileSliceCreator = (set) => ({
     file: null,
     status: 'idle',
-    setFile: (file) => set({ file, status: 'idle', highlights: [], error: null }, false, 'file/setFile'),
-    setStatus: (status) => set({ status }, false, 'file/setStatus'),
+    setFile: (file: File | null) => set({ file, status: 'idle', highlights: [], error: null }, false, 'file/setFile'),
+    setStatus: (status: IFileSlice['status']) => set({ status }, false, 'file/setStatus'),
 });

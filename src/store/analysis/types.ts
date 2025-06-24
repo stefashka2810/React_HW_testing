@@ -1,4 +1,4 @@
-import { AnalysisStatus, Highlight } from '@app-types/analysis';
+import { AnalysisStatus, AnalysisHighlight } from '@app-types/analysis';
 
 export interface IFileSlice {
     file: File | null;
@@ -8,9 +8,9 @@ export interface IFileSlice {
 }
 
 export interface IAnalysisSlice {
-    highlights: Highlight[];
+    highlights: AnalysisHighlight[];
     error: string | null;
-    setHighlights: (highlights: Highlight[]) => void;
+    setHighlights: (highlights: AnalysisHighlight[]) => void;
     setError: (error: string | null) => void;
 }
 

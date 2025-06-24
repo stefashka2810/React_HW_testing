@@ -6,7 +6,7 @@ import { File } from '@ui/icons/File';
 import { Trash } from '@ui/icons/Trash';
 import { Typography } from '@ui/Typography';
 import { formatDate } from '@utils/formateDate';
-import classNames from 'classnames';
+import cn from 'classnames';
 
 import { FileStatus } from '../FileStatus';
 
@@ -14,8 +14,8 @@ import styles from './HistoryItem.module.css';
 
 type Props = {
     item: HistoryItemType;
-    onDelete: (id: string) => void;
     onClick: (item: HistoryItemType) => void;
+    onDelete: (id: string) => void;
 };
 
 export const HistoryItem: FC<Props> = ({ item, onClick, onDelete }) => {
@@ -42,7 +42,7 @@ export const HistoryItem: FC<Props> = ({ item, onClick, onDelete }) => {
             <Button
                 type="button"
                 variant="secondary"
-                className={classNames(styles.item, { [styles.disabled]: !hasHighlights })}
+                className={cn(styles.item, { [styles.disabled]: !hasHighlights })}
                 aria-label={`Открыть хайлайты для ${fileName}`}
                 onClick={handleItemClick}
             >

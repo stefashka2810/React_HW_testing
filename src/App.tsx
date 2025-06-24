@@ -1,4 +1,4 @@
-import { MainLayout } from '@layouts/MainLayout';
+import { MainLayout } from '@components/MainLayout';
 import { GeneratePage } from '@pages/Generate';
 import { HistoryPage } from '@pages/History';
 import { HomePage } from '@pages/Home';
@@ -6,7 +6,12 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 function App() {
     return (
-        <Router>
+        <Router
+            future={{
+                v7_startTransition: true,
+                v7_relativeSplatPath: true,
+            }}
+        >
             <Routes>
                 <Route element={<MainLayout />}>
                     <Route path="/" element={<HomePage />} />

@@ -1,10 +1,10 @@
-import { Highlight } from '@app-types/analysis';
+import { AnalysisHighlight } from '@app-types/analysis';
 import { HIGHLIGHT_TITLES } from '@utils/consts';
 
 import { Highlights } from '../types/common';
 
 /**
- * Custom error for invalid server responses
+ * Кастомная ошибка для некорректных ответов сервера
  */
 export class InvalidServerResponseError extends Error {
     constructor(message: string) {
@@ -13,9 +13,9 @@ export class InvalidServerResponseError extends Error {
     }
 }
 /**
- * Parses the streaming response from the server.
- * @param value The streamed data chunk.
- * @returns The first JSON object from the chunk.
+ * Парсит потоковый ответ от сервера
+ * @param value Блок потоковых данных
+ * @returns Первый JSON объект из блока
  */
 const getFirstJsonObject = (value: Uint8Array): Record<string, string | number> => {
     const decoder = new TextDecoder();
@@ -33,7 +33,7 @@ export const transformAnalysisData = (
     value: Uint8Array
 ): {
     highlights: Highlights;
-    highlightsToStore: Highlight[];
+    highlightsToStore: AnalysisHighlight[];
 } => {
     const rawData = getFirstJsonObject(value);
 
@@ -54,7 +54,7 @@ export const transformAnalysisData = (
  * @param highlights Объект с данными хайлайтов типа Highlights.
  * @returns Массив объектов Highlight с полями title и description.
  */
-export const convertHighlightsToArray = (highlights: Highlights): Highlight[] => {
+export const convertHighlightsToArray = (highlights: Highlights): AnalysisHighlight[] => {
     return Object.entries(highlights).map(([key, title]) => ({
         title: typeof title === 'number' ? String(Math.round(title)) : String(title),
         description: HIGHLIGHT_TITLES[key] ?? 'Неизвестный параметр',
@@ -62,17 +62,17 @@ export const convertHighlightsToArray = (highlights: Highlights): Highlight[] =>
 };
 
 /**
- * Check if file is csv
- * @param file - File to check
- * @returns True if file is csv, false otherwise
+ * Проверяет, является ли файл CSV
+ * @param file - Файл для проверки
+ * @returns true, если файл является CSV, иначе false
  */
 export const isCsvFile = (file: File): boolean => {
     return file.name.toLowerCase().endsWith('.csv');
 };
 /**
- * Validate server response
- * @param rawData - Raw data from server
- * @returns True if response is valid, false otherwise
+ * Валидирует ответ сервера
+ * @param rawData - Сырые данные от сервера
+ * @returns true, если ответ валидный, иначе false
  */
 export const validateServerResponse = (rawData: Record<string, string | number>) => {
     const validHighlightKeys = Object.keys(HIGHLIGHT_TITLES);

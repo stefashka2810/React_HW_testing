@@ -1,4 +1,4 @@
-export interface Highlight {
+export interface AnalysisHighlight {
     title: string;
     description: string;
 }

@@ -1,24 +1,25 @@
-import React, { useRef, useState, useCallback } from 'react';
+import { FC, useRef, useState, useCallback } from 'react';
 
 import { AnalysisStatus } from '@app-types/analysis';
 import { Button } from '@ui/Button';
 import { Loader } from '@ui/Loader';
 import { Typography } from '@ui/Typography';
 import { isCsvFile } from '@utils/analysis';
+import cn from 'classnames';
 
 import { FileDisplay } from '../FileDisplay';
 
 import styles from './Dropzone.module.css';
 
-interface DropzoneProps {
+type Props = {
     file: File | null;
     status: AnalysisStatus;
     error: string | null;
     onFileSelect: (file: File) => void;
     onClear: () => void;
-}
+};
 
-export const Dropzone: React.FC<DropzoneProps> = ({ file, status, error, onFileSelect, onClear }) => {
+export const Dropzone: FC<Props> = ({ file, status, error, onFileSelect, onClear }) => {
     const [isDragActive, setIsDragActive] = useState(false);
     const [validationError, setValidationError] = useState<string | null>(null);
     const inputRef = useRef<HTMLInputElement | null>(null);
@@ -164,11 +165,12 @@ export const Dropzone: React.FC<DropzoneProps> = ({ file, status, error, onFileS
         return 'или перетащите сюда .csv файл';
     };
 
-    const dropzoneClassName = `${styles.dropzone} ${isDragActive ? styles.dragActive : ''} ${validationError ? styles.dragReject : ''}`;
-
     return (
         <div
-            className={dropzoneClassName}
+            className={cn(styles.dropzone, {
+                [styles.dragActive]: isDragActive,
+                [styles.dragReject]: validationError,
+            })}
             onDragEnter={handleDragEnter}
             onDragOver={handleDragOver}
             onDragLeave={handleDragLeave}
