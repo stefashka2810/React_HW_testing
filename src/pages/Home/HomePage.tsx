@@ -1,4 +1,3 @@
-
 import { Highlights } from '@app-types/common';
 import { useCsvAnalysis } from '@hooks/use-csv-analysis';
 import { useAnalysisStore } from '@store/analysisStore';
@@ -43,8 +42,8 @@ export const HomePage = () => {
 
     const handleSend = async () => {
         if (!file || status === 'processing') {
-            return
-        };
+            return;
+        }
 
         setStatus('processing');
         await analyzeCsv(file);
@@ -53,7 +52,7 @@ export const HomePage = () => {
     return (
         <div className={styles.container}>
             <Typography as="h1" size="m" className={styles.title}>
-                Загрузите csv файл и получите полную информацию о нём
+                Загрузите <b>csv</b> файл и <b>получите полную</b> информацию о нём за сверхнизкое время
             </Typography>
 
             <FileUploadSection

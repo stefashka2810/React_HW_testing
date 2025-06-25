@@ -3,7 +3,7 @@ import { useCallback } from 'react';
 import { AnalysisHighlight } from '@app-types/analysis';
 import { Highlights } from '@app-types/common';
 import { InvalidServerResponseError, transformAnalysisData } from '@utils/analysis';
-import { API_URL } from '@utils/consts';
+import { API_HOST } from '@utils/consts';
 
 const DEFAULT_ROWS = 10000;
 
@@ -20,7 +20,7 @@ export const useCsvAnalysis = ({ onData, onError, onComplete }: CsvAnalysisParam
                 const formData = new FormData();
                 formData.append('file', csv);
 
-                const response = await fetch(`${API_URL}/aggregate?rows=${DEFAULT_ROWS}`, {
+                const response = await fetch(`${API_HOST}/aggregate?rows=${DEFAULT_ROWS}`, {
                     method: 'POST',
                     body: formData,
                 });

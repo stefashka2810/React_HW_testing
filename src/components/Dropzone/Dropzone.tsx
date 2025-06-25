@@ -134,7 +134,6 @@ export const Dropzone: FC<Props> = ({ file, status, error, onFileSelect, onClear
             <Button
                 type="button"
                 variant="upload"
-                className={styles.uploadButton}
                 onClick={handleUploadClick}
                 disabled={isProcessing}
             >
@@ -183,9 +182,7 @@ export const Dropzone: FC<Props> = ({ file, status, error, onFileSelect, onClear
 
             {renderContent()}
 
-            <div className={styles.fileStatus}>
-                <Typography size="l">{renderStatusText()}</Typography>
-            </div>
+            <Typography size="l">{renderStatusText()}</Typography>
         </div>
     );
 };

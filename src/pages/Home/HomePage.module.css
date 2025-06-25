@@ -5,34 +5,5 @@
 }
 
 .title {
-    font-size: 25px;
     text-align: center;
-}
-
-.resetButton {
-    align-self: flex-end;
-    background: none;
-    border: none;
-    color: var(--color-primary-gray);
-    cursor: pointer;
-    font-size: 16px;
-    text-decoration: underline;
-}
-
-.highlightsGrid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
-    width: 100%;
-}
-
-.highlightsPlaceholder {
-    text-align: center;
-    color: var(--color-accent-purple);
-    margin-top: 150px;
-}
-
-.sendButton {
-    margin: 0 auto;
-    width: fit-content;
 }

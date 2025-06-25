@@ -1,6 +1,6 @@
 export const STORAGE_KEY = 'tableHistory';
 
-export const API_URL = 'http://localhost:3000';
+export const API_HOST = process.env.API_HOST;
 
 export const HIGHLIGHT_TITLES: Record<string, string> = {
     total_spend_galactic: 'Общие расходы',

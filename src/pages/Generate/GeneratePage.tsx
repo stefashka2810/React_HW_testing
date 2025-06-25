@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { Button } from '@ui/Button';
 import { Loader } from '@ui/Loader';
 import { Typography } from '@ui/Typography';
-import { API_URL } from '@utils/consts';
+import { API_HOST } from '@utils/consts';
 import cn from 'classnames';
 
 import styles from './GeneratePage.module.css';
@@ -21,7 +21,7 @@ export const GeneratePage = () => {
             setIsGenerating(true);
             setError(null);
 
-            const response = await fetch(`${API_URL}/report?size=${DEFAULT_SIZE}`, {
+            const response = await fetch(`${API_HOST}/report?size=${DEFAULT_SIZE}`, {
                 method: 'GET',
             });
 
