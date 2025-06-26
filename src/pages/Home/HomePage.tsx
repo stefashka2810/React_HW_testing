@@ -1,11 +1,11 @@
 import { Highlights } from '@app-types/common';
+import { FileUploadSection } from '@components/FileUploadSection';
+import { HighlightsSection } from '@components/HighlightsSection';
 import { useCsvAnalysis } from '@hooks/use-csv-analysis';
 import { useAnalysisStore } from '@store/analysisStore';
 import { Typography } from '@ui/Typography';
 import { addToHistory } from '@utils/storage';
 
-import { FileUploadSection } from './components/FileUploadSection';
-import { HighlightsSection } from './components/HighlightsSection';
 import styles from './HomePage.module.css';
 
 /**

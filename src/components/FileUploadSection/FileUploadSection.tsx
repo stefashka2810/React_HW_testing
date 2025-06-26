@@ -18,14 +18,7 @@ type Props = {
 /**
  * Компонент секции загрузки и отправки файла
  */
-export const FileUploadSection: FC<Props> = ({
-    file,
-    status,
-    error,
-    onFileSelect,
-    onSend,
-    onClear,
-}) => {
+export const FileUploadSection: FC<Props> = ({ file, status, error, onFileSelect, onSend, onClear }) => {
     const isProcessing = status === 'processing';
     const showSendButton = file && !isProcessing && status !== 'completed';
 
@@ -34,16 +27,10 @@ export const FileUploadSection: FC<Props> = ({
             <Dropzone file={file} status={status} error={error} onFileSelect={onFileSelect} onClear={onClear} />
 
             {showSendButton && (
-                <Button
-                    type="button"
-                    variant="primary"
-                    disabled={!file}
-                    onClick={onSend}
-                    className={styles.sendButton}
-                >
+                <Button type="button" variant="primary" disabled={!file} onClick={onSend} className={styles.sendButton}>
                     Отправить
                 </Button>
             )}
         </>
     );
-}; 
+};

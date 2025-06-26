@@ -27,4 +27,4 @@ export const FileStatus: FC<Props> = ({ type, isActive }) => {
             )}
         </span>
     );
-}; 
+};

@@ -1,1 +1,1 @@
-export { SvgBase } from './SvgBase'; 
+export { SvgBase } from './SvgBase';

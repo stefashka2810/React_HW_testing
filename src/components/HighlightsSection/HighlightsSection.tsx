@@ -29,4 +29,4 @@ export const HighlightsSection: FC<Props> = ({ highlights }) => {
             ))}
         </div>
     );
-}; 
+};

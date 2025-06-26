@@ -11,6 +11,16 @@ import tseslint from "typescript-eslint";
 delete globals.browser["AudioWorkletGlobalScope "];
 
 export default [
+  {
+    ignores: [
+      "dist/**",
+      "node_modules/**",
+      "build/**",
+      "*.min.js",
+      "coverage/**",
+      ".vite/**"
+    ]
+  },
   { files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"] },
   {
     languageOptions: {
