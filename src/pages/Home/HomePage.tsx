@@ -8,9 +8,6 @@ import { addToHistory } from '@utils/storage';
 
 import styles from './HomePage.module.css';
 
-/**
- * Главная страница приложения для анализа CSV файлов
- */
 export const HomePage = () => {
     const { file, status, highlights, error, setFile, setStatus, setHighlights, reset, setError } = useAnalysisStore();
 
@@ -46,6 +43,7 @@ export const HomePage = () => {
         }
 
         setStatus('processing');
+
         await analyzeCsv(file);
     };
 
